@@ -30,6 +30,7 @@ class SchemaOrgBase(BaseModel):
             "by_alias": True
         }
         return super().json(*args, **dict(defaults, **kwargs))
+        
 
     class Config:
         allow_population_by_field_name = True

@@ -1,5 +1,6 @@
 import datetime
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Union, Set, List, Tuple, Callable
 
@@ -9,6 +10,12 @@ from constants import data_type_map, PACKAGE_NAME
 from jinja import jinja_env
 from models import PydanticClass, PydanticField, Import
 
+@dataclass
+class FakeParent:
+    valid_name: str = "BaseModel" 
+
+
+IGNORE = ["Hospital"]
 
 class SchemaOrg:
     def __init__(
@@ -82,7 +89,8 @@ class SchemaOrg:
         for key, field in self._fields_for_model(name):
             field_parent_types = self._get_including_types(field)
 
-            field_types = [type_name for type_name in field_parent_types]
+            field_types = [type_name + "Attr" for type_name in field_parent_types]
+            print("FIELD_TYPES", field_types)
             pydantic_types = ()
             for field_type in sorted(
                     field_types,
@@ -107,9 +115,9 @@ class SchemaOrg:
                         type="pydantic_field",
                     )
                     pydantic_types += (f''
-                                       f"'{field_type}'",)
+                                       f"{field_type}",)
                 else:  # if type is self-reference
-                    pydantic_types += (f"'{field_type}'",)
+                    pydantic_types += (f"{field_type}",)
 
             if field_parent_types != field_types:
                 pydantic_types = pydantic_types + ("Any",)
@@ -146,6 +154,7 @@ class SchemaOrg:
                     if type_tuple == "Any"
                     else f"Optional[Union[List[{type_tuple}], {type_tuple}]]"
                 )
+            print("KEEEEEY", type_tuple)
             fields.append(
                 PydanticField(
                     name=key,
@@ -157,7 +166,7 @@ class SchemaOrg:
             )
         return fields, imports
 
-    def load_type(self, name: str) -> PydanticClass:
+    def load_type(self, name: str, tpls: dict) -> PydanticClass:
         if name in self.pydantic_classes:
             print(f"{name} exists, skipping..")
             return self.pydantic_classes[name]
@@ -167,7 +176,7 @@ class SchemaOrg:
             raise ValueError(f"Model {name} does not exist")
 
         fields, imports = self.extract_fields(name)
-        parents, forward_refs, depth = self.extract_parents(node)
+        parents, forward_refs, depth = self.extract_parents(node, tpls=tpls)
 
         for parent in parents:
             imports = self.update_imports(
@@ -189,19 +198,32 @@ class SchemaOrg:
             forward_refs=forward_refs
         )
 
-        with open(f"{PACKAGE_NAME}/{self.pydantic_classes[name].valid_name}.py", "w") as model_file:
-            with open(
-                    Path(__file__).parent / "templates/model.py.tpl"
-            ) as template_file:
-                template = jinja_env.from_string(template_file.read())
-                template_args = dict(
-                    schemaorg_version=os.getenv("SCHEMAORG_VERSION"),
-                    commit=os.getenv("COMMIT"),
-                    jinja2_version=jinja2.__version__,
-                    timestamp=datetime.datetime.now(),
-                    model=self.pydantic_classes[name],
-                )
-            template.stream(**template_args).dump(model_file)
+        with open(
+                Path(__file__).parent / "templates/model.py.tpl"
+        ) as template_file:
+            template = jinja_env.from_string(template_file.read())
+            template_args = dict(
+                schemaorg_version=os.getenv("SCHEMAORG_VERSION"),
+                commit=os.getenv("COMMIT"),
+                jinja2_version=jinja2.__version__,
+                timestamp=datetime.datetime.now(),
+                model=self.pydantic_classes[name],
+            )
+            print("HIII", self.pydantic_classes[name].parents)
+            print(type(self.pydantic_classes[name].parents))
+            template_args_cp = template_args.copy()
+            model_cp = template_args_cp["model"].copy()
+        #template.stream(**template_args).dump(model_file)
+        if name not in IGNORE:
+            tpls["tpls"].append(template.render(**template_args))
+            model_cp.valid_name = template_args["model"].name + "Attr"
+            model_cp.parents = [FakeParent()]
+            template_args_cp["model"] = model_cp
+            if not name == "Thing":
+                tpls["tpl_attrs"].append(template.render(**template_args_cp))
+        else:
+            print("IGNORING!!!")
+
         return self.pydantic_classes[name]
 
     @staticmethod
@@ -214,7 +236,7 @@ class SchemaOrg:
                 a[forward_ref.classPath] = forward_ref.classes_
         return [Import(type='forward_ref', classPath=k, classes_=v) for k, v in a.items()]
 
-    def extract_parents(self, node) -> (List[PydanticClass], list, int):
+    def extract_parents(self, node, tpls: dict) -> (List[PydanticClass], list, int):
         parent_names = set(
             reference.strip().split(":")[-1]
             for reference in self._to_set(node.get("rdfs:subClassOf", []))
@@ -229,8 +251,8 @@ class SchemaOrg:
         parents: List[PydanticClass] = []
         forward_refs = []
         for parent_name in parent_names:
-            parent = self.load_type(parent_name)
-            parents.append(self.load_type(parent_name))
+            parent = self.load_type(parent_name, tpls=tpls)
+            parents.append(self.load_type(parent_name, tpls=tpls))
             forward_refs += parent.field_imports + parent.forward_refs
 
         parent_depth = next(
@@ -246,7 +268,7 @@ class SchemaOrg:
 
         if not sorted_parents:
             sorted_parents = [
-                PydanticClass(name='SchemaOrgBase', description='', fields=[], parents=[], parent_imports=[],
+                PydanticClass(name='BaseModel', description='', fields=[], parents=[], parent_imports=[],
                               field_imports=[])]
 
         return sorted_parents, self._filter_forward_refs(forward_refs), depth
