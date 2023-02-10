@@ -14,7 +14,7 @@ class SchemaOrg:
     def __init__(
         self,
         schema_org: Dict[str, Dict],
-        type_map: Dict[str, tuple],
+        type_map: Dict[str, str],
         type_specificity: Dict[str, int],
     ):
         self.schema_org = schema_org
@@ -115,9 +115,10 @@ class SchemaOrg:
                         classes_={field_type},
                         type="parent",
                     )
-                    pydantic_types += (f"" f"{field_type}",)
+                    pydantic_types += (f"" f"""dynamic_creation('{field_type}')""",)
                 else:  # if type is self-reference
-                    pydantic_types += (f"'{field_type}'",)
+                    #use any as hack for self ref
+                    pydantic_types += (f"Any",)
 
             if field_parent_types != field_types:
                 pydantic_types = pydantic_types + ("Any",)
@@ -317,6 +318,39 @@ class SchemaOrg:
         return [Import(classes_={"Field"}, classPath="pydantic", type="parent")]
 
     def write_init(self):
+        with open(f"{PACKAGE_NAME}/__init__.py", "w") as init_file:
+            with open(
+                Path(__file__).parent / "templates/__init__.py.tpl"
+            ) as template_file:
+                template = jinja_env.from_string(template_file.read())
+
+                template_args = dict(
+                    schemaorg_version=os.getenv("SCHEMAORG_VERSION"),
+                    commit=os.getenv("COMMIT"),
+                    jinja2_version=jinja2.__version__,
+                    timestamp=datetime.datetime.now(),
+                    all_classes=sorted(
+                        self.pydantic_classes.values(), key=lambda x: x.depth
+                    ),
+                )
+            template.stream(**template_args).dump(init_file)
+        self.write_type_map()
+
+    def write_schemas(self):
+        with open(f"{PACKAGE_NAME}/schemas.py", "w") as schema_file:
+            with open(
+                Path(__file__).parent / "templates/schemas.py.tpl.j2"
+            ) as template_file:
+                template = jinja_env.from_string(template_file.read())
+
+                template_args = dict(
+                    models=sorted(
+                        self.pydantic_classes.values(), key=lambda x: x.depth
+                    ),
+                )
+            template.stream(**template_args).dump(schema_file)
+
+    def write_dynamic_schemas(self):
         with open(f"{PACKAGE_NAME}/__init__.py", "w") as init_file:
             with open(
                 Path(__file__).parent / "templates/__init__.py.tpl"

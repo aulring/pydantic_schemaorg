@@ -66,6 +66,12 @@ class PydanticClass(PydanticBase):
         }:
             return f"{filename}_"
         return values["valid_name"]
+    
+    def to_lookup(self):
+        fields_str = ""
+        for field in self.fields:
+            fields_str += f""""{field.valid_name}": ("{field.type}", None), """.replace(self.valid_name, "Any")
+        return f"LOOKUP['{self.valid_name}'] = "  + "{ " + fields_str + "}"
 
 
 PydanticClass.update_forward_refs()

@@ -3,32 +3,33 @@ from pydantic import BaseModel
 from typing import TYPE_CHECKING
 
 from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
-from pydantic import AnyUrl, StrictInt, StrictFloat
-from datetime import date, datetime
 from typing import List, Optional, Union
+from datetime import date, datetime
+from pydantic import StrictBool, StrictInt, StrictFloat
+from pydantic import AnyUrl, StrictInt, StrictFloat
 
 
-from pydantic import Field
-from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+from pydantic_schemaorg.StructuredValue import StructuredValue
 from pydantic_schemaorg.PriceTypeEnumeration import PriceTypeEnumeration
-from pydantic_schemaorg.Boolean import Boolean
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.PropertyValue import PropertyValue
-from pydantic_schemaorg.PriceSpecification import PriceSpecification
-from pydantic_schemaorg.Number import Number
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.Intangible import Intangible
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.URL import URL
 from pydantic_schemaorg.Action import Action
+from pydantic_schemaorg.Boolean import Boolean
+from pydantic_schemaorg.Text import Text
+from pydantic_schemaorg.Thing import Thing
 from pydantic_schemaorg.DateTime import DateTime
+from pydantic_schemaorg.PropertyValue import PropertyValue
 from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
+from pydantic_schemaorg.ImageObject import ImageObject
+from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+from pydantic_schemaorg.PriceSpecification import PriceSpecification
+from pydantic import Field
+from pydantic_schemaorg.Event import Event
+from pydantic_schemaorg.Number import Number
+from pydantic_schemaorg.Intangible import Intangible
 from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
 from pydantic_schemaorg.Duration import Duration
-from pydantic_schemaorg.Event import Event
-from pydantic_schemaorg.StructuredValue import StructuredValue
+from pydantic_schemaorg.URL import URL
+from pydantic_schemaorg.Date import Date
+from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
 class UnitPriceSpecification(BaseModel):
@@ -38,60 +39,60 @@ class UnitPriceSpecification(BaseModel):
     Model depth: 5
     """
     type_: str = Field(default="UnitPriceSpecification", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[Action, str]], Action, str]] = Field(
+    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, URL, CreativeWork, str]], AnyUrl, URL, CreativeWork, str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[Event, CreativeWork, str]], Event, CreativeWork, str]] = Field(
+    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, URL, str, Text, PropertyValue]], AnyUrl, URL, str, Text, PropertyValue]] = Field(
+    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, URL, ImageObject, str]], AnyUrl, URL, ImageObject, str]] = Field(
+    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -99,22 +100,22 @@ class UnitPriceSpecification(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    eligibleQuantity: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    eligibleQuantity: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The interval and unit of measurement of ordering quantities for which the offer or price"
      "specification is valid. This allows e.g. specifying that a certain freight charge is"
      "valid only for a certain quantity.",
     )
-    valueAddedTaxIncluded: Optional[Union[List[Union[StrictBool, Boolean, str]], StrictBool, Boolean, str]] = Field(
+    valueAddedTaxIncluded: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
         default=None,
         description="Specifies whether the applicable value-added tax (VAT) is included in the price specification"
      "or not.",
     )
-    minPrice: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str]], StrictInt, StrictFloat, Number, str]] = Field(
+    minPrice: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), str]] = Field(
         default=None,
         description="The lowest price if the price is a range.",
     )
-    price: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str, Text]], StrictInt, StrictFloat, Number, str, Text]] = Field(
+    price: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str, dynamic_creation('Text')]], StrictInt, StrictFloat, dynamic_creation('Number'), str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The offer price of a product, or of a price component when attached to PriceSpecification"
      "and its subtypes. Usage guidelines: * Use the [[priceCurrency]] property (with standard"
@@ -131,27 +132,27 @@ class UnitPriceSpecification(BaseModel):
      "0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially"
      "similar Unicode symbols.",
     )
-    validThrough: Optional[Union[List[Union[datetime, DateTime, date, Date, str]], datetime, DateTime, date, Date, str]] = Field(
+    validThrough: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
         default=None,
         description="The date after when the item is not valid. For example the end of an offer, salary period,"
      "or a period of opening hours.",
     )
-    maxPrice: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str]], StrictInt, StrictFloat, Number, str]] = Field(
+    maxPrice: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), str]] = Field(
         default=None,
         description="The highest price if the price is a range.",
     )
-    validFrom: Optional[Union[List[Union[datetime, DateTime, date, Date, str]], datetime, DateTime, date, Date, str]] = Field(
+    validFrom: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
         default=None,
         description="The date when the item becomes valid.",
     )
-    eligibleTransactionVolume: Optional[Union[List[Union['PriceSpecification', str]], 'PriceSpecification', str]] = Field(
+    eligibleTransactionVolume: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The transaction volume, in a monetary unit, for which the offer or price specification"
      "is valid, e.g. for indicating a minimal purchasing volume, to express free shipping"
      "above a certain order volume, or to limit the acceptance of credit cards to purchases"
      "to a certain minimal amount.",
     )
-    priceCurrency: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    priceCurrency: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The currency of the price, or a price component when attached to [[PriceSpecification]]"
      "and its subtypes. Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217),"
@@ -159,7 +160,7 @@ class UnitPriceSpecification(BaseModel):
      "for cryptocurrencies, e.g. \"BTC\"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)"
      "(LETS) and other currency types, e.g. \"Ithaca HOUR\".",
     )
-    priceType: Optional[Union[List[Union[str, Text, PriceTypeEnumeration]], str, Text, PriceTypeEnumeration]] = Field(
+    priceType: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('PriceTypeEnumeration')]], str, dynamic_creation('Text'), dynamic_creation('PriceTypeEnumeration')]] = Field(
         default=None,
         description="Defines the type of a price specified for an offered product, for example a list price,"
      "a (temporary) sale price or a manufacturer suggested retail price. If multiple prices"
@@ -168,41 +169,41 @@ class UnitPriceSpecification(BaseModel):
      "PriceTypeEnumeration or as a free form text string for price types that are not already"
      "predefined in PriceTypeEnumeration.",
     )
-    priceComponentType: Optional[Union[List[Union[PriceComponentTypeEnumeration, str]], PriceComponentTypeEnumeration, str]] = Field(
+    priceComponentType: Optional[Union[List[Union[dynamic_creation('PriceComponentTypeEnumeration'), str]], dynamic_creation('PriceComponentTypeEnumeration'), str]] = Field(
         default=None,
         description="Identifies a price component (for example, a line item on an invoice), part of the total"
      "price for an offer.",
     )
-    billingStart: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str]], StrictInt, StrictFloat, Number, str]] = Field(
+    billingStart: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), str]] = Field(
         default=None,
         description="Specifies after how much time this price (or price component) becomes valid and billing"
      "starts. Can be used, for example, to model a price increase after the first year of a subscription."
      "The unit of measurement is specified by the unitCode property.",
     )
-    unitCode: Optional[Union[List[Union[AnyUrl, URL, str, Text]], AnyUrl, URL, str, Text]] = Field(
+    unitCode: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL."
      "Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.",
     )
-    billingDuration: Optional[Union[List[Union[StrictInt, StrictFloat, Number, Duration, QuantitativeValue, str]], StrictInt, StrictFloat, Number, Duration, QuantitativeValue, str]] = Field(
+    billingDuration: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), dynamic_creation('Duration'), dynamic_creation('QuantitativeValue'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), dynamic_creation('Duration'), dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="Specifies for how long this price (or price component) will be billed. Can be used, for"
      "example, to model the contractual duration of a subscription or payment plan. Type can"
      "be either a Duration or a Number (in which case the unit of measurement, for example month,"
      "is specified by the unitCode property).",
     )
-    unitText: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    unitText: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A string or text indicating the unit of measurement. Useful if you cannot provide a standard"
      "unit code for <a href='unitCode'>unitCode</a>.",
     )
-    referenceQuantity: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    referenceQuantity: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The reference quantity for which a certain price applies, e.g. 1 EUR per 4 kWh of electricity."
      "This property is a replacement for unitOfMeasurement for the advanced cases where the"
      "price does not relate to a standard unit.",
     )
-    billingIncrement: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str]], StrictInt, StrictFloat, Number, str]] = Field(
+    billingIncrement: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), str]] = Field(
         default=None,
         description="This property specifies the minimal quantity and rounding increment that will be the"
      "basis for the billing. The unit of measurement is specified by the unitCode property.",
@@ -210,19 +211,19 @@ class UnitPriceSpecification(BaseModel):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.PriceTypeEnumeration import PriceTypeEnumeration
-    from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
-    from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic import BaseModel
-    from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
     from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Action import Action
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.DateTime import DateTime
+    from pydantic import BaseModel
+    from pydantic_schemaorg.PriceTypeEnumeration import PriceTypeEnumeration
     from pydantic_schemaorg.ImageObject import ImageObject
+    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.PropertyValue import PropertyValue
+    from pydantic_schemaorg.Boolean import Boolean
+    from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.Date import Date

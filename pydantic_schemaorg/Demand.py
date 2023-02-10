@@ -2,47 +2,47 @@ from __future__ import annotations
 from pydantic import BaseModel
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 from datetime import date, datetime, time
-from pydantic import AnyUrl
 from typing import List, Optional, Union
+from pydantic import AnyUrl
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
-from pydantic import Field
-from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-from pydantic_schemaorg.AggregateOffer import AggregateOffer
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.Person import Person
-from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
-from pydantic_schemaorg.WarrantyPromise import WarrantyPromise
-from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-from pydantic_schemaorg.BusinessEntityType import BusinessEntityType
-from pydantic_schemaorg.PaymentMethod import PaymentMethod
+from pydantic_schemaorg.Service import Service
 from pydantic_schemaorg.MenuItem import MenuItem
-from pydantic_schemaorg.Organization import Organization
+from pydantic_schemaorg.BusinessFunction import BusinessFunction
+from pydantic_schemaorg.GeoShape import GeoShape
+from pydantic_schemaorg.BusinessEntityType import BusinessEntityType
+from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
+from pydantic_schemaorg.Product import Product
+from pydantic_schemaorg.WarrantyPromise import WarrantyPromise
+from pydantic_schemaorg.Action import Action
+from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
+from pydantic_schemaorg.Text import Text
+from pydantic_schemaorg.Thing import Thing
+from pydantic_schemaorg.DateTime import DateTime
+from pydantic_schemaorg.Time import Time
 from pydantic_schemaorg.PropertyValue import PropertyValue
+from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
+from pydantic_schemaorg.AggregateOffer import AggregateOffer
+from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+from pydantic_schemaorg.ImageObject import ImageObject
+from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
+from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
 from pydantic_schemaorg.PriceSpecification import PriceSpecification
 from pydantic_schemaorg.ItemAvailability import ItemAvailability
-from pydantic_schemaorg.GeoShape import GeoShape
-from pydantic_schemaorg.Time import Time
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.Service import Service
+from pydantic import Field
+from pydantic_schemaorg.Event import Event
 from pydantic_schemaorg.Intangible import Intangible
 from pydantic_schemaorg.URL import URL
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.Action import Action
-from pydantic_schemaorg.DateTime import DateTime
-from pydantic_schemaorg.BusinessFunction import BusinessFunction
-from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
-from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
-from pydantic_schemaorg.Trip import Trip
-from pydantic_schemaorg.Event import Event
+from pydantic_schemaorg.PaymentMethod import PaymentMethod
+from pydantic_schemaorg.Person import Person
+from pydantic_schemaorg.Organization import Organization
+from pydantic_schemaorg.Date import Date
 from pydantic_schemaorg.Place import Place
-from pydantic_schemaorg.Product import Product
+from pydantic_schemaorg.CreativeWork import CreativeWork
+from pydantic_schemaorg.Trip import Trip
+from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
 
 
 class Demand(BaseModel):
@@ -54,60 +54,60 @@ class Demand(BaseModel):
     Model depth: 3
     """
     type_: str = Field(default="Demand", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[Action, str]], Action, str]] = Field(
+    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, URL, CreativeWork, str]], AnyUrl, URL, CreativeWork, str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[Event, CreativeWork, str]], Event, CreativeWork, str]] = Field(
+    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, URL, str, Text, PropertyValue]], AnyUrl, URL, str, Text, PropertyValue]] = Field(
+    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, URL, ImageObject, str]], AnyUrl, URL, ImageObject, str]] = Field(
+    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -115,68 +115,68 @@ class Demand(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    eligibleQuantity: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    eligibleQuantity: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The interval and unit of measurement of ordering quantities for which the offer or price"
      "specification is valid. This allows e.g. specifying that a certain freight charge is"
      "valid only for a certain quantity.",
     )
-    deliveryLeadTime: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    deliveryLeadTime: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The typical delay between the receipt of the order and the goods either leaving the warehouse"
      "or being prepared for pickup, in case the delivery method is on site pickup.",
     )
-    availabilityEnds: Optional[Union[List[Union[datetime, DateTime, date, Date, time, Time, str]], datetime, DateTime, date, Date, time, Time, str]] = Field(
+    availabilityEnds: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), time, dynamic_creation('Time'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), time, dynamic_creation('Time'), str]] = Field(
         default=None,
         description="The end of the availability of the product or service included in the offer.",
     )
-    seller: Optional[Union[List[Union[Organization, Person, str]], Organization, Person, str]] = Field(
+    seller: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
         default=None,
         description="An entity which offers (sells / leases / lends / loans) the services / goods. A seller may"
      "also be a provider.",
     )
-    availabilityStarts: Optional[Union[List[Union[datetime, DateTime, date, Date, time, Time, str]], datetime, DateTime, date, Date, time, Time, str]] = Field(
+    availabilityStarts: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), time, dynamic_creation('Time'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), time, dynamic_creation('Time'), str]] = Field(
         default=None,
         description="The beginning of the availability of the product or service included in the offer.",
     )
-    areaServed: Optional[Union[List[Union[str, Text, AdministrativeArea, Place, GeoShape]], str, Text, AdministrativeArea, Place, GeoShape]] = Field(
+    areaServed: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('AdministrativeArea'), dynamic_creation('Place')]], str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('AdministrativeArea'), dynamic_creation('Place')]] = Field(
         default=None,
         description="The geographic area where a service or offered item is provided.",
     )
-    advanceBookingRequirement: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    advanceBookingRequirement: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The amount of time that is required between accepting the offer and the actual usage of"
      "the resource or service.",
     )
-    gtin14: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    gtin14: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN"
      "Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
     )
-    warranty: Optional[Union[List[Union[WarrantyPromise, str]], WarrantyPromise, str]] = Field(
+    warranty: Optional[Union[List[Union[dynamic_creation('WarrantyPromise'), str]], dynamic_creation('WarrantyPromise'), str]] = Field(
         default=None,
         description="The warranty promise(s) included in the offer.",
     )
-    inventoryLevel: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    inventoryLevel: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The current approximate inventory level for the item or items.",
     )
-    eligibleDuration: Optional[Union[List[Union[QuantitativeValue, str]], QuantitativeValue, str]] = Field(
+    eligibleDuration: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
         default=None,
         description="The duration for which the given offer is valid.",
     )
-    availability: Optional[Union[List[Union[ItemAvailability, str]], ItemAvailability, str]] = Field(
+    availability: Optional[Union[List[Union[dynamic_creation('ItemAvailability'), str]], dynamic_creation('ItemAvailability'), str]] = Field(
         default=None,
         description="The availability of this item&#x2014;for example In stock, Out of stock, Pre-order,"
      "etc.",
     )
-    itemCondition: Optional[Union[List[Union[OfferItemCondition, str]], OfferItemCondition, str]] = Field(
+    itemCondition: Optional[Union[List[Union[dynamic_creation('OfferItemCondition'), str]], dynamic_creation('OfferItemCondition'), str]] = Field(
         default=None,
         description="A predefined value from OfferItemCondition specifying the condition of the product"
      "or service, or the products or services included in the offer. Also used for product return"
      "policies to specify the condition of products accepted for returns.",
     )
-    gtin: Optional[Union[List[Union[AnyUrl, URL, str, Text]], AnyUrl, URL, str, Text]] = Field(
+    gtin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
         default=None,
         description="A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin))."
      "GTINs identify trade items, including products and services, using numeric identification"
@@ -196,42 +196,42 @@ class Demand(BaseModel):
      "data, and not a definition of GTINs in general - see the GS1 documentation for authoritative"
      "details.",
     )
-    itemOffered: Optional[Union[List[Union[Service, MenuItem, Trip, AggregateOffer, Event, Product, CreativeWork, str]], Service, MenuItem, Trip, AggregateOffer, Event, Product, CreativeWork, str]] = Field(
+    itemOffered: Optional[Union[List[Union[dynamic_creation('AggregateOffer'), dynamic_creation('CreativeWork'), dynamic_creation('Product'), dynamic_creation('Trip'), dynamic_creation('Event'), dynamic_creation('Service'), dynamic_creation('MenuItem'), str]], dynamic_creation('AggregateOffer'), dynamic_creation('CreativeWork'), dynamic_creation('Product'), dynamic_creation('Trip'), dynamic_creation('Event'), dynamic_creation('Service'), dynamic_creation('MenuItem'), str]] = Field(
         default=None,
         description="An item being offered (or demanded). The transactional nature of the offer or demand"
      "is documented using [[businessFunction]], e.g. sell, lease etc. While several common"
      "expected types are listed explicitly in this definition, others can be used. Using a"
      "second type, such as Product or a subtype of Product, can clarify the nature of the offer.",
     )
-    businessFunction: Optional[Union[List[Union[BusinessFunction, str]], BusinessFunction, str]] = Field(
+    businessFunction: Optional[Union[List[Union[dynamic_creation('BusinessFunction'), str]], dynamic_creation('BusinessFunction'), str]] = Field(
         default=None,
         description="The business function (e.g. sell, lease, repair, dispose) of the offer or component"
      "of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.",
     )
-    gtin12: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    gtin12: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12"
      "is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference,"
      "and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    validThrough: Optional[Union[List[Union[datetime, DateTime, date, Date, str]], datetime, DateTime, date, Date, str]] = Field(
+    validThrough: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
         default=None,
         description="The date after when the item is not valid. For example the end of an offer, salary period,"
      "or a period of opening hours.",
     )
-    includesObject: Optional[Union[List[Union[TypeAndQuantityNode, str]], TypeAndQuantityNode, str]] = Field(
+    includesObject: Optional[Union[List[Union[dynamic_creation('TypeAndQuantityNode'), str]], dynamic_creation('TypeAndQuantityNode'), str]] = Field(
         default=None,
         description="This links to a node or nodes indicating the exact quantity of the products included in"
      "an [[Offer]] or [[ProductCollection]].",
     )
-    eligibleRegion: Optional[Union[List[Union[str, Text, Place, GeoShape]], str, Text, Place, GeoShape]] = Field(
+    eligibleRegion: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('Place')]], str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('Place')]] = Field(
         default=None,
         description="The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for"
      "the geo-political region(s) for which the offer or delivery charge specification is"
      "valid. See also [[ineligibleRegion]].",
     )
-    asin: Optional[Union[List[Union[AnyUrl, URL, str, Text]], AnyUrl, URL, str, Text]] = Field(
+    asin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
         default=None,
         description="An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique"
      "identifier assigned by Amazon.com and its partners for product identification within"
@@ -241,103 +241,103 @@ class Demand(BaseModel):
      "details. ASINs are most commonly encoded as text strings, but the [asin] property supports"
      "URL/URI as potential values too.",
     )
-    gtin8: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    gtin8: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The GTIN-8 code of the product, or the product to which the offer refers. This code is also"
      "known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    ineligibleRegion: Optional[Union[List[Union[str, Text, Place, GeoShape]], str, Text, Place, GeoShape]] = Field(
+    ineligibleRegion: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('Place')]], str, dynamic_creation('Text'), dynamic_creation('GeoShape'), dynamic_creation('Place')]] = Field(
         default=None,
         description="The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for"
      "the geo-political region(s) for which the offer or delivery charge specification is"
      "not valid, e.g. a region where the transaction is not allowed. See also [[eligibleRegion]].",
     )
-    priceSpecification: Optional[Union[List[Union[PriceSpecification, str]], PriceSpecification, str]] = Field(
+    priceSpecification: Optional[Union[List[Union[dynamic_creation('PriceSpecification'), str]], dynamic_creation('PriceSpecification'), str]] = Field(
         default=None,
         description="One or more detailed price specifications, indicating the unit price and delivery or"
      "payment charges.",
     )
-    validFrom: Optional[Union[List[Union[datetime, DateTime, date, Date, str]], datetime, DateTime, date, Date, str]] = Field(
+    validFrom: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
         default=None,
         description="The date when the item becomes valid.",
     )
-    eligibleTransactionVolume: Optional[Union[List[Union[PriceSpecification, str]], PriceSpecification, str]] = Field(
+    eligibleTransactionVolume: Optional[Union[List[Union[dynamic_creation('PriceSpecification'), str]], dynamic_creation('PriceSpecification'), str]] = Field(
         default=None,
         description="The transaction volume, in a monetary unit, for which the offer or price specification"
      "is valid, e.g. for indicating a minimal purchasing volume, to express free shipping"
      "above a certain order volume, or to limit the acceptance of credit cards to purchases"
      "to a certain minimal amount.",
     )
-    mpn: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    mpn: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
     )
-    availableAtOrFrom: Optional[Union[List[Union[Place, str]], Place, str]] = Field(
+    availableAtOrFrom: Optional[Union[List[Union[dynamic_creation('Place'), str]], dynamic_creation('Place'), str]] = Field(
         default=None,
         description="The place(s) from which the offer can be obtained (e.g. store locations).",
     )
-    eligibleCustomerType: Optional[Union[List[Union[BusinessEntityType, str]], BusinessEntityType, str]] = Field(
+    eligibleCustomerType: Optional[Union[List[Union[dynamic_creation('BusinessEntityType'), str]], dynamic_creation('BusinessEntityType'), str]] = Field(
         default=None,
         description="The type(s) of customers for which the given offer is valid.",
     )
-    gtin13: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    gtin13: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent"
      "to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into"
      "a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    serialNumber: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    serialNumber: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The serial number or any alphanumeric identifier of a particular product. When attached"
      "to an offer, it is a shortcut for the serial number of the product included in the offer.",
     )
-    sku: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+    sku: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
         default=None,
         description="The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service,"
      "or the product to which the offer refers.",
     )
-    acceptedPaymentMethod: Optional[Union[List[Union[PaymentMethod, LoanOrCredit, str]], PaymentMethod, LoanOrCredit, str]] = Field(
+    acceptedPaymentMethod: Optional[Union[List[Union[dynamic_creation('PaymentMethod'), dynamic_creation('LoanOrCredit'), str]], dynamic_creation('PaymentMethod'), dynamic_creation('LoanOrCredit'), str]] = Field(
         default=None,
         description="The payment method(s) accepted by seller for this offer.",
     )
-    availableDeliveryMethod: Optional[Union[List[Union[DeliveryMethod, str]], DeliveryMethod, str]] = Field(
+    availableDeliveryMethod: Optional[Union[List[Union[dynamic_creation('DeliveryMethod'), str]], dynamic_creation('DeliveryMethod'), str]] = Field(
         default=None,
         description="The delivery method(s) available for this offer.",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
-    from pydantic_schemaorg.GeoShape import GeoShape
-    from pydantic_schemaorg.Trip import Trip
-    from pydantic_schemaorg.PriceSpecification import PriceSpecification
-    from pydantic_schemaorg.BusinessEntityType import BusinessEntityType
-    from pydantic_schemaorg.MenuItem import MenuItem
-    from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
-    from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.WarrantyPromise import WarrantyPromise
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.ItemAvailability import ItemAvailability
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic import BaseModel
-    from pydantic_schemaorg.BusinessFunction import BusinessFunction
-    from pydantic_schemaorg.ImageObject import ImageObject
     from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.PaymentMethod import PaymentMethod
+    from pydantic_schemaorg.Trip import Trip
+    from pydantic import BaseModel
     from pydantic_schemaorg.AggregateOffer import AggregateOffer
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Action import Action
+    from pydantic_schemaorg.GeoShape import GeoShape
+    from pydantic_schemaorg.PropertyValue import PropertyValue
+    from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
+    from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
+    from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.BusinessEntityType import BusinessEntityType
+    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.PaymentMethod import PaymentMethod
     from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.ItemAvailability import ItemAvailability
+    from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg.ImageObject import ImageObject
+    from pydantic_schemaorg.MenuItem import MenuItem
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.Date import Date
+    from pydantic_schemaorg.PriceSpecification import PriceSpecification
+    from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Action import Action
+    from pydantic_schemaorg.BusinessFunction import BusinessFunction
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
+    from pydantic_schemaorg.Service import Service
