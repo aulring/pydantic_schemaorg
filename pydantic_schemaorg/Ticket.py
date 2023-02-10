@@ -1,71 +1,156 @@
 from __future__ import annotations
+from pydantic import BaseModel
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictInt, StrictFloat
 from datetime import date, datetime
+from pydantic import AnyUrl, StrictInt, StrictFloat
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from typing import List, Optional, Union
 
 
 from pydantic import Field
+from pydantic_schemaorg.DateTime import DateTime
+from pydantic_schemaorg.ImageObject import ImageObject
+from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
+from pydantic_schemaorg.Action import Action
+from pydantic_schemaorg.CreativeWork import CreativeWork
+from pydantic_schemaorg.PropertyValue import PropertyValue
+from pydantic_schemaorg.Organization import Organization
+from pydantic_schemaorg.Thing import Thing
+from pydantic_schemaorg.PriceSpecification import PriceSpecification
+from pydantic_schemaorg.URL import URL
 from pydantic_schemaorg.Intangible import Intangible
+from pydantic_schemaorg.Person import Person
+from pydantic_schemaorg.Date import Date
+from pydantic_schemaorg.Event import Event
+from pydantic_schemaorg.Number import Number
+from pydantic_schemaorg.Text import Text
+from pydantic_schemaorg.Seat import Seat
 
 
-class Ticket(Intangible):
+class Ticket(BaseModel):
     """Used to describe a ticket to an event, a flight, a bus ride, etc.
 
     See: https://schema.org/Ticket
     Model depth: 3
     """
     type_: str = Field(default="Ticket", alias='@type', const=True)
-    underName: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    potentialAction: Optional[Union[List[Union[Action, str]], Action, str]] = Field(
         default=None,
-        description="The person or organization the reservation or ticket is for.",
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",
     )
-    ticketNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, URL, CreativeWork, str]], AnyUrl, URL, CreativeWork, str]] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",
+    )
+    subjectOf: Optional[Union[List[Union[Event, CreativeWork, str]], Event, CreativeWork, str]] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",
+    )
+    url: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+        default=None,
+        description="URL of the item.",
+    )
+    alternateName: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+        default=None,
+        description="An alias for the item.",
+    )
+    sameAs: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",
+    )
+    description: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+        default=None,
+        description="A description of the item.",
+    )
+    disambiguatingDescription: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",
+    )
+    identifier: Optional[Union[List[Union[AnyUrl, URL, str, Text, PropertyValue]], AnyUrl, URL, str, Text, PropertyValue]] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",
+    )
+    image: Optional[Union[List[Union[AnyUrl, URL, ImageObject, str]], AnyUrl, URL, ImageObject, str]] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+    )
+    name: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
+        default=None,
+        description="The name of the item.",
+    )
+    additionalType: Optional[Union[List[Union[AnyUrl, URL, str]], AnyUrl, URL, str]] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'"
+     "attribute - for multiple types. Schema.org tools may have only weaker understanding"
+     "of extra types, in particular those defined externally.",
+    )
+    ticketNumber: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
         default=None,
         description="The unique identifier for the ticket.",
     )
-    ticketToken: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    issuedBy: Optional[Union[List[Union[Organization, str]], Organization, str]] = Field(
+        default=None,
+        description="The organization issuing the ticket or permit.",
+    )
+    ticketToken: Optional[Union[List[Union[AnyUrl, URL, str, Text]], AnyUrl, URL, str, Text]] = Field(
         default=None,
         description="Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.",
     )
-    priceCurrency: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The currency of the price, or a price component when attached to [[PriceSpecification]]"
-     "and its subtypes. Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217)"
-     "e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies)"
-     "for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)"
-     "(LETS) and other currency types e.g. \"Ithaca HOUR\".",
-    )
-    totalPrice: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text', 'PriceSpecification']], StrictInt, StrictFloat, 'Number', str, 'Text', 'PriceSpecification']] = Field(
+    totalPrice: Optional[Union[List[Union[StrictInt, StrictFloat, Number, str, Text, PriceSpecification]], StrictInt, StrictFloat, Number, str, Text, PriceSpecification]] = Field(
         default=None,
         description="The total price for the reservation or ticket, including applicable taxes, shipping,"
      "etc. Usage guidelines: * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030)"
-     "to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols. * Use"
+     "to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols. * Use"
      "'.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid"
      "using these symbols as a readability separator.",
     )
-    dateIssued: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    underName: Optional[Union[List[Union[Organization, Person, str]], Organization, Person, str]] = Field(
         default=None,
-        description="The date the ticket was issued.",
+        description="The person or organization the reservation or ticket is for.",
     )
-    ticketedSeat: Optional[Union[List[Union['Seat', str]], 'Seat', str]] = Field(
+    ticketedSeat: Optional[Union[List[Union[Seat, str]], Seat, str]] = Field(
         default=None,
         description="The seat associated with the ticket.",
     )
-    issuedBy: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    priceCurrency: Optional[Union[List[Union[str, Text]], str, Text]] = Field(
         default=None,
-        description="The organization issuing the ticket or permit.",
+        description="The currency of the price, or a price component when attached to [[PriceSpecification]]"
+     "and its subtypes. Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217),"
+     "e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies)"
+     "for cryptocurrencies, e.g. \"BTC\"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)"
+     "(LETS) and other currency types, e.g. \"Ithaca HOUR\".",
+    )
+    dateIssued: Optional[Union[List[Union[datetime, DateTime, date, Date, str]], datetime, DateTime, date, Date, str]] = Field(
+        default=None,
+        description="The date the ticket was issued.",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.PriceSpecification import PriceSpecification
-    from pydantic_schemaorg.DateTime import DateTime
+    from pydantic_schemaorg.Event import Event
     from pydantic_schemaorg.Date import Date
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Number import Number
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.PropertyValue import PropertyValue
+    from pydantic import BaseModel
+    from pydantic_schemaorg.PriceSpecification import PriceSpecification
+    from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Seat import Seat
+    from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.DateTime import DateTime
+    from pydantic_schemaorg.Action import Action
+    from pydantic_schemaorg.Person import Person
+    from pydantic_schemaorg.ImageObject import ImageObject

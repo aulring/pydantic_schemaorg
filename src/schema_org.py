@@ -12,15 +12,16 @@ from models import PydanticClass, PydanticField, Import
 
 class SchemaOrg:
     def __init__(
-            self,
-            schema_org: Dict[str, Dict],
-            type_map: Dict[str, tuple],
-            type_specificity: Dict[str, int],
+        self,
+        schema_org: Dict[str, Dict],
+        type_map: Dict[str, tuple],
+        type_specificity: Dict[str, int],
     ):
         self.schema_org = schema_org
         self.pydantic_classes: Dict[str, Union[PydanticClass, tuple]] = dict()
         self._type_specificity = dict(type_specificity)
         self.pydantic_fields = {k: {} for k in data_type_map}
+        self.imports_lookup = {}
 
     def get_all_classes(self):
         return [
@@ -34,7 +35,7 @@ class SchemaOrg:
 
     @staticmethod
     def update_imports(
-            imports: List[Import], class_path: str, classes_: set, type: str
+        imports: List[Import], class_path: str, classes_: set, type: str
     ) -> List[Import]:
         filter_func: Callable[[Import], bool] = (
             lambda i: i.classPath == class_path and i.type == type
@@ -71,12 +72,13 @@ class SchemaOrg:
             (key.strip().split(":")[-1], field)
             for key, field in self.schema_org.items()
             if (
-                    field.get("@type") == "rdf:Property"
-                    and f"schema:{name}" in self._to_set(field.get("schema:domainIncludes"))
+                field.get("@type") == "rdf:Property"
+                and f"schema:{name}" in self._to_set(field.get("schema:domainIncludes"))
             )
         ]
 
     def extract_fields(self, name: str) -> (List[PydanticField], List[Import]):
+
         fields: List[PydanticField] = []
         imports = self._get_default_imports()
         for key, field in self._fields_for_model(name):
@@ -85,9 +87,9 @@ class SchemaOrg:
             field_types = [type_name for type_name in field_parent_types]
             pydantic_types = ()
             for field_type in sorted(
-                    field_types,
-                    key=lambda ft: self._type_specificity.get(ft, 0),
-                    reverse=True,
+                field_types,
+                key=lambda ft: self._type_specificity.get(ft, 0),
+                reverse=True,
             ):
                 if field_type in data_type_map:
                     pydantic_types += (data_type_map[field_type][0],)
@@ -100,14 +102,20 @@ class SchemaOrg:
                         )
 
                 if name != field_type:
+                    print("NAME", name)
                     imports = self.update_imports(
                         imports,
                         class_path=f"{PACKAGE_NAME}.{field_type}",
                         classes_={field_type},
                         type="pydantic_field",
                     )
-                    pydantic_types += (f''
-                                       f"'{field_type}'",)
+                    imports = self.update_imports(
+                        imports,
+                        class_path=f"{PACKAGE_NAME}.{field_type}",
+                        classes_={field_type},
+                        type="parent",
+                    )
+                    pydantic_types += (f"" f"{field_type}",)
                 else:  # if type is self-reference
                     pydantic_types += (f"'{field_type}'",)
 
@@ -129,9 +137,7 @@ class SchemaOrg:
                     type="field",
                 )
                 optional = pydantic_types[-1] != "Any"
-                pydantic_types = (
-                    f"Union[List[Union[{type_tuple}]], {type_tuple}]"
-                )
+                pydantic_types = f"Union[List[Union[{type_tuple}]], {type_tuple}]"
                 if optional:
                     pydantic_types = f"Optional[{pydantic_types}]"
             else:
@@ -146,6 +152,7 @@ class SchemaOrg:
                     if type_tuple == "Any"
                     else f"Optional[Union[List[{type_tuple}], {type_tuple}]]"
                 )
+                #TODO: unpack fields to doc string... cuz we need to create dynamically, but it's still nice to have the description
             fields.append(
                 PydanticField(
                     name=key,
@@ -169,6 +176,10 @@ class SchemaOrg:
         fields, imports = self.extract_fields(name)
         parents, forward_refs, depth = self.extract_parents(node)
 
+        parent_fields = []
+        parent_imports = []
+        parent_field_imports = []
+        parent_pydantic_imports = []
         for parent in parents:
             imports = self.update_imports(
                 imports,
@@ -176,22 +187,63 @@ class SchemaOrg:
                 classes_={parent.valid_name},
                 type="parent",
             )
+            parent_fields += parent.fields
+            if not parent.valid_name == "SchemaOrgBase":
+                parent_imports += self.pydantic_classes[
+                    parent.valid_name
+                ].parent_imports
+                parent_field_imports += self.pydantic_classes[
+                    parent.valid_name
+                ].field_imports
+                parent_pydantic_imports += self.pydantic_classes[
+                    parent.valid_name
+                ].pydantic_imports
 
         self.pydantic_classes[name] = PydanticClass(
             name=name,
             description=self.cast_description(node.get("rdfs:comment", "")),
-            fields=list(fields),
+            fields=[*parent_fields, *fields],
             parents=parents,
-            parent_imports=list(filter(lambda x: x.type == 'parent', imports)),
+            parent_imports=list(
+                set(
+                    [
+                        *list(filter(lambda x: x.type == "parent", imports)),
+                        *parent_imports,
+                    ]
+                )
+            ),
             depth=depth,
-            field_imports=list(filter(lambda x: x.type == 'field', imports)),
-            pydantic_imports=list(filter(lambda x: x.type == 'pydantic_field', imports)),
-            forward_refs=forward_refs
+            field_imports=list(
+                set(
+                    [
+                        *list(filter(lambda x: x.type == "field", imports)),
+                        *parent_field_imports,
+                    ]
+                )
+            ),
+            pydantic_imports=list(
+                set(
+                    [
+                        *list(filter(lambda x: x.type == "pydantic_field", imports)),
+                        *parent_pydantic_imports,
+                        *[
+                            Import(
+                                type="pydantic_field",
+                                classPath="pydantic",
+                                classes_=set(["BaseModel"]),
+                            )
+                        ],
+                    ]
+                )
+            ),
+            forward_refs=forward_refs,
         )
 
-        with open(f"{PACKAGE_NAME}/{self.pydantic_classes[name].valid_name}.py", "w") as model_file:
+        with open(
+            f"{PACKAGE_NAME}/{self.pydantic_classes[name].valid_name}.py", "w"
+        ) as model_file:
             with open(
-                    Path(__file__).parent / "templates/model.py.tpl"
+                Path(__file__).parent / "templates/model.py.tpl"
             ) as template_file:
                 template = jinja_env.from_string(template_file.read())
                 template_args = dict(
@@ -212,7 +264,9 @@ class SchemaOrg:
                 a[forward_ref.classPath].update(forward_ref.classes_)
             else:
                 a[forward_ref.classPath] = forward_ref.classes_
-        return [Import(type='forward_ref', classPath=k, classes_=v) for k, v in a.items()]
+        return [
+            Import(type="forward_ref", classPath=k, classes_=v) for k, v in a.items()
+        ]
 
     def extract_parents(self, node) -> (List[PydanticClass], list, int):
         parent_names = set(
@@ -246,8 +300,15 @@ class SchemaOrg:
 
         if not sorted_parents:
             sorted_parents = [
-                PydanticClass(name='SchemaOrgBase', description='', fields=[], parents=[], parent_imports=[],
-                              field_imports=[])]
+                PydanticClass(
+                    name="SchemaOrgBase",
+                    description="",
+                    fields=[],
+                    parents=[],
+                    parent_imports=[],
+                    field_imports=[],
+                )
+            ]
 
         return sorted_parents, self._filter_forward_refs(forward_refs), depth
 
@@ -258,7 +319,7 @@ class SchemaOrg:
     def write_init(self):
         with open(f"{PACKAGE_NAME}/__init__.py", "w") as init_file:
             with open(
-                    Path(__file__).parent / "templates/__init__.py.tpl"
+                Path(__file__).parent / "templates/__init__.py.tpl"
             ) as template_file:
                 template = jinja_env.from_string(template_file.read())
 
@@ -267,7 +328,9 @@ class SchemaOrg:
                     commit=os.getenv("COMMIT"),
                     jinja2_version=jinja2.__version__,
                     timestamp=datetime.datetime.now(),
-                    all_classes=sorted(self.pydantic_classes.values(), key=lambda x: x.depth),
+                    all_classes=sorted(
+                        self.pydantic_classes.values(), key=lambda x: x.depth
+                    ),
                 )
             template.stream(**template_args).dump(init_file)
         self.write_type_map()
@@ -275,7 +338,7 @@ class SchemaOrg:
     def write_type_map(self):
         with open(f"{PACKAGE_NAME}/__types__.py", "w") as type_file:
             with open(
-                    Path(__file__).parent / "templates/__types__.py.tpl"
+                Path(__file__).parent / "templates/__types__.py.tpl"
             ) as template_file:
                 template = jinja_env.from_string(template_file.read())
 
@@ -285,6 +348,6 @@ class SchemaOrg:
                     jinja2_version=jinja2.__version__,
                     timestamp=datetime.datetime.now(),
                     type_map=data_type_map,
-                    pydantic_classes={k: v for k, v in self.pydantic_classes.items()}
+                    pydantic_classes={k: v for k, v in self.pydantic_classes.items()},
                 )
             template.stream(**template_args).dump(type_file)
