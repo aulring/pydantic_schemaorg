@@ -1,37 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
-from typing import TYPE_CHECKING
-
-from datetime import date, datetime
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
-from typing import List, Optional, Union
-
-
-from pydantic_schemaorg.ReturnMethodEnumeration import ReturnMethodEnumeration
-from pydantic_schemaorg.Integer import Integer
-from pydantic_schemaorg.MonetaryAmount import MonetaryAmount
-from pydantic_schemaorg.Boolean import Boolean
-from pydantic_schemaorg.Action import Action
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.RefundTypeEnumeration import RefundTypeEnumeration
-from pydantic_schemaorg.MerchantReturnPolicySeasonalOverride import MerchantReturnPolicySeasonalOverride
-from pydantic_schemaorg.DateTime import DateTime
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.PropertyValue import PropertyValue
-from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.ReturnFeesEnumeration import ReturnFeesEnumeration
-from pydantic import Field
-from pydantic_schemaorg.Event import Event
-from pydantic_schemaorg.Country import Country
-from pydantic_schemaorg.Number import Number
-from pydantic_schemaorg.Intangible import Intangible
-from pydantic_schemaorg.URL import URL
-from pydantic_schemaorg.MerchantReturnEnumeration import MerchantReturnEnumeration
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-from pydantic_schemaorg.ReturnLabelSourceEnumeration import ReturnLabelSourceEnumeration
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
 
 
 class MerchantReturnPolicy(BaseModel):
@@ -42,60 +13,60 @@ class MerchantReturnPolicy(BaseModel):
     Model depth: 3
     """
     type_: str = Field(default="MerchantReturnPolicy", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
+    potentialAction: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
+    subjectOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    url: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternateName: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    sameAs: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    description: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    disambiguatingDescription: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
+    identifier: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    image: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    name: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    additionalType: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -103,15 +74,15 @@ class MerchantReturnPolicy(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    refundType: Optional[Union[List[Union[dynamic_creation('RefundTypeEnumeration'), str]], dynamic_creation('RefundTypeEnumeration'), str]] = Field(
+    refundType: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A refund type, from an enumerated list.",
     )
-    customerRemorseReturnFees: Optional[Union[List[Union[dynamic_creation('ReturnFeesEnumeration'), str]], dynamic_creation('ReturnFeesEnumeration'), str]] = Field(
+    customerRemorseReturnFees: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The type of return fees if the product is returned due to customer remorse.",
     )
-    additionalProperty: Optional[Union[List[Union[dynamic_creation('PropertyValue'), str]], dynamic_creation('PropertyValue'), str]] = Field(
+    additionalProperty: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A property-value pair representing an additional characteristic of the entity, e.g."
      "a product feature or another characteristic for which there is no matching property"
@@ -120,88 +91,88 @@ class MerchantReturnPolicy(BaseModel):
      "https://schema.org/gtin13, ...) will typically expect such data to be provided using"
      "those properties, rather than using the generic property/value mechanism.",
     )
-    itemDefectReturnLabelSource: Optional[Union[List[Union[dynamic_creation('ReturnLabelSourceEnumeration'), str]], dynamic_creation('ReturnLabelSourceEnumeration'), str]] = Field(
+    itemDefectReturnLabelSource: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The method (from an enumeration) by which the customer obtains a return shipping label"
      "for a defect product.",
     )
-    inStoreReturnsOffered: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    inStoreReturnsOffered: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="Are in-store returns offered? (For more advanced return methods use the [[returnMethod]]"
      "property.)",
     )
-    itemCondition: Optional[Union[List[Union[dynamic_creation('OfferItemCondition'), str]], dynamic_creation('OfferItemCondition'), str]] = Field(
+    itemCondition: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A predefined value from OfferItemCondition specifying the condition of the product"
      "or service, or the products or services included in the offer. Also used for product return"
      "policies to specify the condition of products accepted for returns.",
     )
-    restockingFee: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), dynamic_creation('MonetaryAmount'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), dynamic_creation('MonetaryAmount'), str]] = Field(
+    restockingFee: Optional[Union[List[Union[Any, StrictInt, StrictFloat, str]], Any, StrictInt, StrictFloat, str]] = Field(
         default=None,
         description="Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use"
      "[[Number]] to specify a percentage of the product price paid by the customer.",
     )
-    returnPolicyCategory: Optional[Union[List[Union[dynamic_creation('MerchantReturnEnumeration'), str]], dynamic_creation('MerchantReturnEnumeration'), str]] = Field(
+    returnPolicyCategory: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Specifies an applicable return policy (from an enumeration).",
     )
-    returnLabelSource: Optional[Union[List[Union[dynamic_creation('ReturnLabelSourceEnumeration'), str]], dynamic_creation('ReturnLabelSourceEnumeration'), str]] = Field(
+    returnLabelSource: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The method (from an enumeration) by which the customer obtains a return shipping label"
      "for a product returned for any reason.",
     )
-    applicableCountry: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('Country')]], str, dynamic_creation('Text'), dynamic_creation('Country')]] = Field(
+    applicableCountry: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A country where a particular merchant return policy applies to, for example the two-letter"
      "ISO 3166-1 alpha-2 country code.",
     )
-    returnMethod: Optional[Union[List[Union[dynamic_creation('ReturnMethodEnumeration'), str]], dynamic_creation('ReturnMethodEnumeration'), str]] = Field(
+    returnMethod: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The type of return method offered, specified from an enumeration.",
     )
-    returnShippingFeesAmount: Optional[Union[List[Union[dynamic_creation('MonetaryAmount'), str]], dynamic_creation('MonetaryAmount'), str]] = Field(
+    returnShippingFeesAmount: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Amount of shipping costs for product returns (for any reason). Applicable when property"
      "[[returnFees]] equals [[ReturnShippingFees]].",
     )
-    itemDefectReturnShippingFeesAmount: Optional[Union[List[Union[dynamic_creation('MonetaryAmount'), str]], dynamic_creation('MonetaryAmount'), str]] = Field(
+    itemDefectReturnShippingFeesAmount: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Amount of shipping costs for defect product returns. Applicable when property [[itemDefectReturnFees]]"
      "equals [[ReturnShippingFees]].",
     )
-    returnPolicySeasonalOverride: Optional[Union[List[Union[dynamic_creation('MerchantReturnPolicySeasonalOverride'), str]], dynamic_creation('MerchantReturnPolicySeasonalOverride'), str]] = Field(
+    returnPolicySeasonalOverride: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Seasonal override of a return policy.",
     )
-    customerRemorseReturnShippingFeesAmount: Optional[Union[List[Union[dynamic_creation('MonetaryAmount'), str]], dynamic_creation('MonetaryAmount'), str]] = Field(
+    customerRemorseReturnShippingFeesAmount: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The amount of shipping costs if a product is returned due to customer remorse. Applicable"
      "when property [[customerRemorseReturnFees]] equals [[ReturnShippingFees]].",
     )
-    returnFees: Optional[Union[List[Union[dynamic_creation('ReturnFeesEnumeration'), str]], dynamic_creation('ReturnFeesEnumeration'), str]] = Field(
+    returnFees: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The type of return fees for purchased products (for any return reason).",
     )
-    customerRemorseReturnLabelSource: Optional[Union[List[Union[dynamic_creation('ReturnLabelSourceEnumeration'), str]], dynamic_creation('ReturnLabelSourceEnumeration'), str]] = Field(
+    customerRemorseReturnLabelSource: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The method (from an enumeration) by which the customer obtains a return shipping label"
      "for a product returned due to customer remorse.",
     )
-    merchantReturnLink: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    merchantReturnLink: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Specifies a Web page or service by URL, for product returns.",
     )
-    itemDefectReturnFees: Optional[Union[List[Union[dynamic_creation('ReturnFeesEnumeration'), str]], dynamic_creation('ReturnFeesEnumeration'), str]] = Field(
+    itemDefectReturnFees: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The type of return fees for returns of defect products.",
     )
-    merchantReturnDays: Optional[Union[List[Union[int, dynamic_creation('Integer'), datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], int, dynamic_creation('Integer'), datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    merchantReturnDays: Optional[Union[List[Union[int, date, str, datetime, Any]], int, date, str, datetime, Any]] = Field(
         default=None,
         description="Specifies either a fixed return date or the number of days (from the delivery date) that"
      "a product can be returned. Used when the [[returnPolicyCategory]] property is specified"
      "as [[MerchantReturnFiniteReturnWindow]].",
     )
-    returnPolicyCountry: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('Country')]], str, dynamic_creation('Text'), dynamic_creation('Country')]] = Field(
+    returnPolicyCountry: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The country where the product has to be sent to for returns, for example \"Ireland\" using"
      "the [[name]] property of [[Country]]. You can also provide the two-letter [ISO 3166-1"
@@ -210,27 +181,3 @@ class MerchantReturnPolicy(BaseModel):
      "to.",
     )
     
-
-if TYPE_CHECKING:
-    from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-    from pydantic_schemaorg.ReturnMethodEnumeration import ReturnMethodEnumeration
-    from pydantic_schemaorg.MerchantReturnPolicySeasonalOverride import MerchantReturnPolicySeasonalOverride
-    from pydantic import BaseModel
-    from pydantic_schemaorg.MonetaryAmount import MonetaryAmount
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic_schemaorg.ReturnFeesEnumeration import ReturnFeesEnumeration
-    from pydantic_schemaorg.RefundTypeEnumeration import RefundTypeEnumeration
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.MerchantReturnEnumeration import MerchantReturnEnumeration
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.ImageObject import ImageObject
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Action import Action
-    from pydantic_schemaorg.ReturnLabelSourceEnumeration import ReturnLabelSourceEnumeration
-    from pydantic_schemaorg.CreativeWork import CreativeWork

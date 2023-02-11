@@ -102,7 +102,7 @@ class SchemaOrg:
                         )
 
                 if name != field_type:
-                    print("NAME", name)
+                    # print("NAME", name)
                     imports = self.update_imports(
                         imports,
                         class_path=f"{PACKAGE_NAME}.{field_type}",
@@ -115,7 +115,7 @@ class SchemaOrg:
                         classes_={field_type},
                         type="parent",
                     )
-                    pydantic_types += (f"" f"""dynamic_creation('{field_type}')""",)
+                    pydantic_types += (f"" f"Any",)
                 else:  # if type is self-reference
                     #use any as hack for self ref
                     pydantic_types += (f"Any",)
@@ -126,7 +126,7 @@ class SchemaOrg:
             if not "str" in pydantic_types:
                 pydantic_types += ("str",)
 
-            type_tuple = ", ".join(pydantic_types)
+            type_tuple = ", ".join(list(set(pydantic_types)))
 
             if not pydantic_types:
                 continue

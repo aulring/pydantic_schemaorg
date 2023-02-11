@@ -1,45 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
-from typing import TYPE_CHECKING
-
-from datetime import date, datetime, time
-from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
-from pydantic import AnyUrl, StrictBool
-
-
-from pydantic_schemaorg.Integer import Integer
-from pydantic_schemaorg.Offer import Offer
-from pydantic_schemaorg.Schedule import Schedule
-from pydantic_schemaorg.DefinedTerm import DefinedTerm
-from pydantic_schemaorg.Action import Action
-from pydantic_schemaorg.Audience import Audience
-from pydantic_schemaorg.Boolean import Boolean
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.DateTime import DateTime
-from pydantic_schemaorg.Time import Time
-from pydantic_schemaorg.PropertyValue import PropertyValue
-from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.EventStatusType import EventStatusType
-from pydantic import Field
-from pydantic_schemaorg.Event import Event
-from pydantic_schemaorg.Grant import Grant
-from pydantic_schemaorg.AggregateRating import AggregateRating
-from pydantic_schemaorg.Duration import Duration
-from pydantic_schemaorg.URL import URL
-from pydantic_schemaorg.Person import Person
-from pydantic_schemaorg.Organization import Organization
-from pydantic_schemaorg.Review import Review
-from pydantic_schemaorg.EventAttendanceModeEnumeration import EventAttendanceModeEnumeration
-from pydantic_schemaorg.Language import Language
-from pydantic_schemaorg.Demand import Demand
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.Place import Place
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.VirtualLocation import VirtualLocation
-from pydantic_schemaorg.PostalAddress import PostalAddress
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
 
 
 class ChildrensEvent(BaseModel):
@@ -49,60 +12,60 @@ class ChildrensEvent(BaseModel):
     Model depth: 3
     """
     type_: str = Field(default="ChildrensEvent", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
+    potentialAction: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
+    subjectOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    url: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternateName: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    sameAs: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    description: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    disambiguatingDescription: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
+    identifier: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    image: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    name: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    additionalType: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -110,51 +73,51 @@ class ChildrensEvent(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    performer: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    performer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A performer at the event&#x2014;for example, a presenter, musician, musical group"
      "or actor.",
     )
-    eventAttendanceMode: Optional[Union[List[Union[dynamic_creation('EventAttendanceModeEnumeration'), str]], dynamic_creation('EventAttendanceModeEnumeration'), str]] = Field(
+    eventAttendanceMode: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The eventAttendanceMode of an event indicates whether it occurs online, offline, or"
      "a mix.",
     )
-    workFeatured: Optional[Union[List[Union[dynamic_creation('CreativeWork'), str]], dynamic_creation('CreativeWork'), str]] = Field(
+    workFeatured: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A work featured in some event, e.g. exhibited in an ExhibitionEvent. Specific subproperties"
      "are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).",
     )
-    remainingAttendeeCapacity: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    remainingAttendeeCapacity: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The number of attendee places for an event that remain unallocated.",
     )
-    actor: Optional[Union[List[Union[dynamic_creation('Person'), str]], dynamic_creation('Person'), str]] = Field(
+    actor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An actor, e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated"
      "with individual items or with a series, episode, clip.",
     )
-    doorTime: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), time, dynamic_creation('Time'), str]], datetime, dynamic_creation('DateTime'), time, dynamic_creation('Time'), str]] = Field(
+    doorTime: Optional[Union[List[Union[datetime, Any, time, str]], datetime, Any, time, str]] = Field(
         default=None,
         description="The time admission will commence.",
     )
-    previousStartDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    previousStartDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="Used in conjunction with eventStatus for rescheduled or cancelled events. This property"
      "contains the previously scheduled start date. For rescheduled events, the startDate"
      "property should be used for the newly scheduled start date. In the (rare) case of an event"
      "that has been postponed and rescheduled multiple times, this field may be repeated.",
     )
-    recordedIn: Optional[Union[List[Union[dynamic_creation('CreativeWork'), str]], dynamic_creation('CreativeWork'), str]] = Field(
+    recordedIn: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The CreativeWork that captured all or part of this Event.",
     )
-    keywords: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    keywords: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    contributor: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    contributor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A secondary contributor to the CreativeWork or Event.",
     )
@@ -163,7 +126,7 @@ class ChildrensEvent(BaseModel):
         description="An event that this event is a part of. For example, a collection of individual music performances"
      "might each have a music festival as their superEvent.",
     )
-    eventSchedule: Optional[Union[List[Union[dynamic_creation('Schedule'), str]], dynamic_creation('Schedule'), str]] = Field(
+    eventSchedule: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Associates an [[Event]] with a [[Schedule]]. There are circumstances where it is preferable"
      "to share a schedule for a series of repeating events rather than data on the individual"
@@ -175,52 +138,52 @@ class ChildrensEvent(BaseModel):
      "any ambiguity for clients using the data. The property might have repeated values to"
      "specify different schedules, e.g. for different months or seasons.",
     )
-    maximumVirtualAttendeeCapacity: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    maximumVirtualAttendeeCapacity: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]]"
      "is [[OnlineEventAttendanceMode]] (or the online aspects, in the case of a [[MixedEventAttendanceMode]]).",
     )
-    attendees: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    attendees: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person attending the event.",
     )
-    review: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    review: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A review of the item.",
     )
-    eventStatus: Optional[Union[List[Union[dynamic_creation('EventStatusType'), str]], dynamic_creation('EventStatusType'), str]] = Field(
+    eventStatus: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An eventStatus of an event represents its status; particularly useful when an event"
      "is cancelled or rescheduled.",
     )
-    funding: Optional[Union[List[Union[dynamic_creation('Grant'), str]], dynamic_creation('Grant'), str]] = Field(
+    funding: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
      "See also [[ownershipFundingInfo]].",
     )
-    workPerformed: Optional[Union[List[Union[dynamic_creation('CreativeWork'), str]], dynamic_creation('CreativeWork'), str]] = Field(
+    workPerformed: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A work performed in some event, for example a play performed in a TheaterEvent.",
     )
-    duration: Optional[Union[List[Union[dynamic_creation('Duration'), str]], dynamic_creation('Duration'), str]] = Field(
+    duration: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).",
     )
-    about: Optional[Union[List[Union[dynamic_creation('Thing'), str]], dynamic_creation('Thing'), str]] = Field(
+    about: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The subject matter of the content.",
     )
-    composer: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    composer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The person or organization who wrote a composition, or who is the composer of a work performed"
      "at some event.",
     )
-    funder: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    funder: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
     )
-    isAccessibleForFree: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    isAccessibleForFree: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="A flag to signal that the item, event, or place is accessible for free.",
     )
@@ -229,15 +192,15 @@ class ChildrensEvent(BaseModel):
         description="An Event that is part of this event. For example, a conference event includes many presentations,"
      "each of which is a subEvent of the conference.",
     )
-    typicalAgeRange: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    typicalAgeRange: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The typical expected age range, e.g. '7-9', '11-'.",
     )
-    audience: Optional[Union[List[Union[dynamic_creation('Audience'), str]], dynamic_creation('Audience'), str]] = Field(
+    audience: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An intended audience, i.e. a group for whom something was created.",
     )
-    attendee: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    attendee: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person or organization attending the event.",
     )
@@ -246,46 +209,46 @@ class ChildrensEvent(BaseModel):
         description="Events that are a part of this event. For example, a conference event includes many presentations,"
      "each subEvents of the conference.",
     )
-    performers: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    performers: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The main performer or performers of the event&#x2014;for example, a presenter, musician,"
      "or actor.",
     )
-    maximumAttendeeCapacity: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    maximumAttendeeCapacity: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The total number of individuals that may attend an event or venue.",
     )
-    translator: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    translator: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Organization or person who adapts a creative work to different languages, regional"
      "differences and technical requirements of a target market, or that translates during"
      "some event.",
     )
-    aggregateRating: Optional[Union[List[Union[dynamic_creation('AggregateRating'), str]], dynamic_creation('AggregateRating'), str]] = Field(
+    aggregateRating: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    maximumPhysicalAttendeeCapacity: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    maximumPhysicalAttendeeCapacity: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]]"
      "is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]).",
     )
-    director: Optional[Union[List[Union[dynamic_creation('Person'), str]], dynamic_creation('Person'), str]] = Field(
+    director: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors"
      "can be associated with individual items or with a series, episode, clip.",
     )
-    inLanguage: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('Language')]], str, dynamic_creation('Text'), dynamic_creation('Language')]] = Field(
+    inLanguage: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The language of the content or performance or used in an action. Please use one of the language"
      "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
      "[[availableLanguage]].",
     )
-    startDate: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    startDate: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
     )
-    offers: Optional[Union[List[Union[dynamic_creation('Offer'), dynamic_creation('Demand'), str]], dynamic_creation('Offer'), dynamic_creation('Demand'), str]] = Field(
+    offers: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -294,55 +257,22 @@ class ChildrensEvent(BaseModel):
      "of common types, it can be used in others. In that case, using a second type, such as Product"
      "or a subtype of Product, can clarify the nature of the offer.",
     )
-    endDate: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    endDate: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
     )
-    location: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('PostalAddress'), dynamic_creation('Place'), dynamic_creation('VirtualLocation')]], str, dynamic_creation('Text'), dynamic_creation('PostalAddress'), dynamic_creation('Place'), dynamic_creation('VirtualLocation')]] = Field(
+    location: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The location of, for example, where an event is happening, where an organization is located,"
      "or where an action takes place.",
     )
-    sponsor: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    sponsor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
     )
-    organizer: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    organizer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An organizer of an Event.",
     )
     
-
-if TYPE_CHECKING:
-    from pydantic_schemaorg.Grant import Grant
-    from pydantic_schemaorg.VirtualLocation import VirtualLocation
-    from pydantic import BaseModel
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.Time import Time
-    from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.EventStatusType import EventStatusType
-    from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.Demand import Demand
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.PostalAddress import PostalAddress
-    from pydantic_schemaorg.Review import Review
-    from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.ImageObject import ImageObject
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.Action import Action
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.AggregateRating import AggregateRating
-    from pydantic_schemaorg.Schedule import Schedule
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.EventAttendanceModeEnumeration import EventAttendanceModeEnumeration
-    from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Thing import Thing

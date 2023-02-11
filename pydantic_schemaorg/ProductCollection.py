@@ -1,75 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
-from typing import TYPE_CHECKING
-
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
-from typing import List, Optional, Union
-from datetime import date
-from pydantic import AnyUrl, StrictBool
-from datetime import date, datetime
-from typing import List, Optional, Union
-
-
-from pydantic_schemaorg.Service import Service
-from pydantic_schemaorg.Collection import Collection
-from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
-from pydantic_schemaorg.AlignmentObject import AlignmentObject
-from pydantic_schemaorg.Integer import Integer
-from pydantic_schemaorg.ProductGroup import ProductGroup
-from pydantic_schemaorg.Product import Product
-from pydantic_schemaorg.Offer import Offer
-from pydantic_schemaorg.MusicRecording import MusicRecording
-from pydantic_schemaorg.DefinedTerm import DefinedTerm
-from pydantic_schemaorg.Boolean import Boolean
-from pydantic_schemaorg.Audience import Audience
-from pydantic_schemaorg.Action import Action
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.AdultOrientedEnumeration import AdultOrientedEnumeration
-from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.AudioObject import AudioObject
-from pydantic_schemaorg.DateTime import DateTime
-from pydantic_schemaorg.WebPage import WebPage
-from pydantic_schemaorg.PropertyValue import PropertyValue
-from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
-from pydantic_schemaorg.SizeSpecification import SizeSpecification
-from pydantic_schemaorg.MediaObject import MediaObject
-from pydantic_schemaorg.ItemList import ItemList
-from pydantic_schemaorg.Rating import Rating
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.InteractionCounter import InteractionCounter
-from pydantic_schemaorg.Brand import Brand
-from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-from pydantic_schemaorg.PublicationEvent import PublicationEvent
-from pydantic_schemaorg.VideoObject import VideoObject
-from pydantic import Field
-from pydantic_schemaorg.Event import Event
-from pydantic_schemaorg.Grant import Grant
-from pydantic_schemaorg.Country import Country
-from pydantic_schemaorg.CategoryCode import CategoryCode
-from pydantic_schemaorg.Number import Number
-from pydantic_schemaorg.AggregateRating import AggregateRating
-from pydantic_schemaorg.ProductModel import ProductModel
-from pydantic_schemaorg.Duration import Duration
-from pydantic_schemaorg.URL import URL
-from pydantic_schemaorg.Person import Person
-from pydantic_schemaorg.Organization import Organization
-from pydantic_schemaorg.WebContent import WebContent
-from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
-from pydantic_schemaorg.Review import Review
-from pydantic_schemaorg.Comment import Comment
-from pydantic_schemaorg.ListItem import ListItem
-from pydantic_schemaorg.CorrectionComment import CorrectionComment
-from pydantic_schemaorg.Claim import Claim
-from pydantic_schemaorg.Language import Language
-from pydantic_schemaorg.Demand import Demand
-from pydantic_schemaorg.EnergyConsumptionDetails import EnergyConsumptionDetails
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.Place import Place
-from pydantic_schemaorg.Clip import Clip
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-from pydantic_schemaorg.Distance import Distance
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
 
 
 class ProductCollection(BaseModel):
@@ -80,60 +13,60 @@ class ProductCollection(BaseModel):
     Model depth: 3
     """
     type_: str = Field(default="ProductCollection", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
+    potentialAction: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
+    subjectOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    url: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternateName: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    sameAs: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    description: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    disambiguatingDescription: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
+    identifier: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    image: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    name: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    additionalType: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -147,13 +80,13 @@ class ProductCollection(BaseModel):
      "“Journey to the West”, a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese"
      "translation Tây du ký bình khảo.",
     )
-    educationalLevel: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    educationalLevel: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The level in terms of progression through an educational or training context. Examples"
      "of educational levels include 'beginner', 'intermediate' or 'advanced', and formal"
      "sets of level indicators.",
     )
-    associatedMedia: Optional[Union[List[Union[dynamic_creation('MediaObject'), str]], dynamic_creation('MediaObject'), str]] = Field(
+    associatedMedia: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A media object that encodes this CreativeWork. This property is a synonym for encoding.",
     )
@@ -161,61 +94,61 @@ class ProductCollection(BaseModel):
         default=None,
         description="A creative work that this work is an example/instance/realization/derivation of.",
     )
-    releasedEvent: Optional[Union[List[Union[dynamic_creation('PublicationEvent'), str]], dynamic_creation('PublicationEvent'), str]] = Field(
+    releasedEvent: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The place and time the release was issued, expressed as a PublicationEvent.",
     )
-    version: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str, dynamic_creation('Text')]], StrictInt, StrictFloat, dynamic_creation('Number'), str, dynamic_creation('Text')]] = Field(
+    version: Union[List[Union[Any, StrictInt, StrictFloat, str]], Any, StrictInt, StrictFloat, str] = Field(
         default=None,
         description="The version of the CreativeWork embodied by a specified resource.",
     )
-    locationCreated: Optional[Union[List[Union[dynamic_creation('Place'), str]], dynamic_creation('Place'), str]] = Field(
+    locationCreated: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The location where the CreativeWork was created, which may not be the same as the location"
      "depicted in the CreativeWork.",
     )
-    acquireLicensePage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    acquireLicensePage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page documenting how licenses can be purchased or otherwise acquired, for"
      "the current item.",
     )
-    thumbnailUrl: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    thumbnailUrl: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A thumbnail image relevant to the Thing.",
     )
-    provider: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    provider: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
      "A provider may also serve as the seller.",
     )
-    expires: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    expires: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="Date the content expires and is no longer useful or available. For example a [[VideoObject]]"
      "or [[NewsArticle]] whose availability or relevance is time-limited, or a [[ClaimReview]]"
      "fact check whose publisher wants to indicate that it may no longer be relevant (or helpful"
      "to highlight) after some date.",
     )
-    contentLocation: Optional[Union[List[Union[dynamic_creation('Place'), str]], dynamic_creation('Place'), str]] = Field(
+    contentLocation: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The location depicted or described in the content. For example, the location in a photograph"
      "or painting.",
     )
-    educationalUse: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    educationalUse: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The purpose of a work in the context of education; for example, 'assignment', 'group"
      "work'.",
     )
-    copyrightHolder: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    copyrightHolder: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The party holding the legal copyright to the CreativeWork.",
     )
-    accessibilityControl: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessibilityControl: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Identifies input methods that are sufficient to fully control the described resource."
      "Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).",
     )
-    maintainer: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    maintainer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]), or other"
      "[[Project]]. A maintainer is a [[Person]] or [[Organization]] that manages contributions"
@@ -228,45 +161,45 @@ class ProductCollection(BaseModel):
      "maintainers working on integration into software distributions such as Ubuntu, as"
      "well as upstream maintainers of the underlying work.",
     )
-    educationalAlignment: Optional[Union[List[Union[dynamic_creation('AlignmentObject'), str]], dynamic_creation('AlignmentObject'), str]] = Field(
+    educationalAlignment: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An alignment to an established educational framework. This property should not be used"
      "where the nature of the alignment can be described using a simple property, for example"
      "to express that a resource [[teaches]] or [[assesses]] a competency.",
     )
-    spatial: Optional[Union[List[Union[dynamic_creation('Place'), str]], dynamic_creation('Place'), str]] = Field(
+    spatial: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The \"spatial\" property can be used in cases when more specific properties (e.g. [[locationCreated]],"
      "[[spatialCoverage]], [[contentLocation]]) are not known to be appropriate.",
     )
-    publisher: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    publisher: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The publisher of the creative work.",
     )
-    keywords: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    keywords: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    assesses: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    assesses: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The item being described is intended to assess the competency or learning outcome defined"
      "by the referenced term.",
     )
-    reviews: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    reviews: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Review of the item.",
     )
-    isBasedOn: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, dynamic_creation('Product'), str]], AnyUrl, dynamic_creation('URL'), Any, dynamic_creation('Product'), str]] = Field(
+    isBasedOn: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A resource from which this work is derived or from which it is a modification or adaption.",
     )
-    mentions: Optional[Union[List[Union[dynamic_creation('Thing'), str]], dynamic_creation('Thing'), str]] = Field(
+    mentions: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates that the CreativeWork contains a reference to, but is not necessarily about"
      "a concept.",
     )
-    publishingPrinciples: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    publishingPrinciples: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="The publishingPrinciples property indicates (typically via [[URL]]) a document describing"
      "the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]]"
@@ -276,37 +209,37 @@ class ProductCollection(BaseModel):
      "While such policies are most typically expressed in natural language, sometimes related"
      "information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.",
     )
-    contributor: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    contributor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A secondary contributor to the CreativeWork or Event.",
     )
-    license: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    license: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A license document that applies to this content, typically indicated by URL.",
     )
-    citation: Union[List[Union[str, dynamic_creation('Text'), Any]], str, dynamic_creation('Text'), Any] = Field(
+    citation: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A citation or reference to another creative work, such as another publication, web page,"
      "scholarly article, etc.",
     )
-    accessibilitySummary: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessibilitySummary: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A human-readable summary of specific accessibility features or deficiencies, consistent"
      "with the other accessibility metadata but expressing subtleties such as \"short descriptions"
      "are present but long descriptions will be needed for non-visual users\" or \"short descriptions"
      "are present and no long descriptions are needed.\"",
     )
-    award: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    award: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An award won by or for this item.",
     )
-    commentCount: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    commentCount: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The number of comments this CreativeWork (e.g. Article, Question or Answer) has received."
      "This is most applicable to works published in Web sites with commenting system; additional"
      "comments may exist elsewhere.",
     )
-    temporalCoverage: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], datetime, dynamic_creation('DateTime'), AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    temporalCoverage: Union[List[Union[datetime, Any, str, AnyUrl]], datetime, Any, str, AnyUrl] = Field(
         default=None,
         description="The temporalCoverage of a CreativeWork indicates the period that the content applies"
      "to, i.e. that it describes, either as a DateTime or as a textual string indicating a time"
@@ -321,38 +254,38 @@ class ProductCollection(BaseModel):
      "\"2015-11/..\" indicates a range beginning in November 2015 and with no specified final"
      "date. This is tentative and might be updated in future when ISO 8601 is officially updated.",
     )
-    dateCreated: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    dateCreated: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="The date on which the CreativeWork was created or the item was added to a DataFeed.",
     )
-    discussionUrl: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    discussionUrl: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A link to the page containing the comments of the CreativeWork.",
     )
-    copyrightNotice: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    copyrightNotice: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Text of a notice appropriate for describing the copyright aspects of this Creative Work,"
      "ideally indicating the owner of the copyright for the Work.",
     )
-    learningResourceType: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    learningResourceType: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The predominant type or kind characterizing the learning resource. For example, 'presentation',"
      "'handout'.",
     )
-    awards: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    awards: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Awards won by or for this item.",
     )
-    accessModeSufficient: Optional[Union[List[Union[dynamic_creation('ItemList'), str]], dynamic_creation('ItemList'), str]] = Field(
+    accessModeSufficient: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A list of single or combined accessModes that are sufficient to understand all the intellectual"
      "content of a resource. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).",
     )
-    review: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    review: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A review of the item.",
     )
-    conditionsOfAccess: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    conditionsOfAccess: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Conditions that affect the availability of, or method(s) of access to, an item. Typically"
      "used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]."
@@ -360,16 +293,16 @@ class ProductCollection(BaseModel):
      "expressed only in natural language. For example \"Available by appointment from the"
      "Reading Room\" or \"Accessible only from logged-in accounts \".",
     )
-    interactivityType: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    interactivityType: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The predominant mode of learning supported by the learning resource. Acceptable values"
      "are 'active', 'expositive', or 'mixed'.",
     )
-    abstract: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    abstract: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An abstract is a short description that summarizes a [[CreativeWork]].",
     )
-    fileFormat: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    fileFormat: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Media type, typically MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml))"
      "of the content, e.g. application/zip of a SoftwareApplication binary. In cases where"
@@ -378,38 +311,38 @@ class ProductCollection(BaseModel):
      "file formats can be indicated instead via the most appropriate URL, e.g. defining Web"
      "page or a Wikipedia entry.",
     )
-    interpretedAsClaim: Optional[Union[List[Union[dynamic_creation('Claim'), str]], dynamic_creation('Claim'), str]] = Field(
+    interpretedAsClaim: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Used to indicate a specific claim contained, implied, translated or refined from the"
      "content of a [[MediaObject]] or other [[CreativeWork]]. The interpreting party can"
      "be indicated using [[claimInterpreter]].",
     )
-    text: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    text: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The textual content of this CreativeWork.",
     )
-    archivedAt: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('WebPage'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('WebPage'), str]] = Field(
+    archivedAt: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page or other link involved in archival of a [[CreativeWork]]. In the case"
      "of [[MediaReview]], the items in a [[MediaReviewItem]] may often become inaccessible,"
      "but be archived by archival, journalistic, activist, or law enforcement organizations."
      "In such cases, the referenced page may not directly publish the content.",
     )
-    alternativeHeadline: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternativeHeadline: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A secondary title of the CreativeWork.",
     )
-    creditText: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    creditText: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Text that can be used to credit person(s) and/or organization(s) associated with a published"
      "Creative Work.",
     )
-    funding: Optional[Union[List[Union[dynamic_creation('Grant'), str]], dynamic_creation('Grant'), str]] = Field(
+    funding: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
      "See also [[ownershipFundingInfo]].",
     )
-    interactionStatistic: Optional[Union[List[Union[dynamic_creation('InteractionCounter'), str]], dynamic_creation('InteractionCounter'), str]] = Field(
+    interactionStatistic: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The number of interactions for the CreativeWork using the WebSite or SoftwareApplication."
      "The most specific child type of InteractionCounter should be used.",
@@ -419,39 +352,39 @@ class ProductCollection(BaseModel):
         description="Example/instance/realization/derivation of the concept of this creative work. E.g."
      "the paperback edition, first edition, or e-book.",
     )
-    about: Optional[Union[List[Union[dynamic_creation('Thing'), str]], dynamic_creation('Thing'), str]] = Field(
+    about: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The subject matter of the content.",
     )
-    encodings: Optional[Union[List[Union[dynamic_creation('MediaObject'), str]], dynamic_creation('MediaObject'), str]] = Field(
+    encodings: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A media object that encodes this CreativeWork.",
     )
-    funder: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    funder: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
     )
-    video: Optional[Union[List[Union[dynamic_creation('VideoObject'), dynamic_creation('Clip'), str]], dynamic_creation('VideoObject'), dynamic_creation('Clip'), str]] = Field(
+    video: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An embedded video object.",
     )
-    isPartOf: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    isPartOf: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is"
      "part of.",
     )
-    pattern: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    pattern: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'."
      "Values are typically expressed as text, although links to controlled value schemes"
      "are also supported.",
     )
-    editor: Optional[Union[List[Union[dynamic_creation('Person'), str]], dynamic_creation('Person'), str]] = Field(
+    editor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Specifies the Person who edited the CreativeWork.",
     )
-    dateModified: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    dateModified: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="The date on which the CreativeWork was most recently modified or when the item's entry"
      "was modified within a DataFeed.",
@@ -461,51 +394,51 @@ class ProductCollection(BaseModel):
         description="The work that this work has been translated from. E.g. 物种起源 is a translationOf “On the"
      "Origin of Species”.",
     )
-    creativeWorkStatus: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    creativeWorkStatus: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The status of a creative work in terms of its stage in a lifecycle. Example terms include"
      "Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for"
      "the stages of their publication lifecycle.",
     )
-    isBasedOnUrl: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, dynamic_creation('Product'), str]], AnyUrl, dynamic_creation('URL'), Any, dynamic_creation('Product'), str]] = Field(
+    isBasedOnUrl: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A resource that was used in the creation of this resource. This term can be repeated for"
      "multiple sources. For example, http://example.com/great-multiplication-intro.html.",
     )
-    isFamilyFriendly: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    isFamilyFriendly: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="Indicates whether this content is family friendly.",
     )
-    isAccessibleForFree: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    isAccessibleForFree: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="A flag to signal that the item, event, or place is accessible for free.",
     )
-    author: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    author: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The author of this content or rating. Please note that author is special in that HTML 5"
      "provides a special mechanism for indicating authorship via the rel tag. That is equivalent"
      "to this and may be used interchangeably.",
     )
-    contentReferenceTime: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), str]], datetime, dynamic_creation('DateTime'), str]] = Field(
+    contentReferenceTime: Optional[Union[List[Union[datetime, Any, str]], datetime, Any, str]] = Field(
         default=None,
         description="The specific time described by a creative work, for works (e.g. articles, video objects"
      "etc.) that emphasise a particular moment within an Event.",
     )
-    correction: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CorrectionComment')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CorrectionComment')]] = Field(
+    correction: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Indicates a correction to a [[CreativeWork]], either via a [[CorrectionComment]],"
      "textually or in another document.",
     )
-    sdDatePublished: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    sdDatePublished: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="Indicates the date on which the current structured data was generated / published. Typically"
      "used alongside [[sdPublisher]]",
     )
-    comment: Optional[Union[List[Union[dynamic_creation('Comment'), str]], dynamic_creation('Comment'), str]] = Field(
+    comment: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Comments, typically from users.",
     )
-    countryOfOrigin: Optional[Union[List[Union[dynamic_creation('Country'), str]], dynamic_creation('Country'), str]] = Field(
+    countryOfOrigin: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The country of origin of something, including products as well as creative works such"
      "as movie and TV content. In the case of TV and movie, this would be the country of the principle"
@@ -515,25 +448,25 @@ class ProductCollection(BaseModel):
      "case of products, the country of origin of the product. The exact interpretation of this"
      "may vary by context and product type, and cannot be fully enumerated here.",
     )
-    timeRequired: Optional[Union[List[Union[dynamic_creation('Duration'), str]], dynamic_creation('Duration'), str]] = Field(
+    timeRequired: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Approximate or typical time it takes to work with or through this learning resource for"
      "the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.",
     )
-    typicalAgeRange: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    typicalAgeRange: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The typical expected age range, e.g. '7-9', '11-'.",
     )
-    genre: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    genre: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Genre of the creative work, broadcast channel or group.",
     )
-    producer: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    producer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The person or organization who produced the work (e.g. music album, movie, TV/radio"
      "series etc.).",
     )
-    schemaVersion: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    schemaVersion: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Indicates (by URL or string) a particular version of a schema used in some CreativeWork."
      "This property was created primarily to indicate the use of a specific schema.org release,"
@@ -542,24 +475,24 @@ class ProductCollection(BaseModel):
      "e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/```"
      "but this has not been carefully explored in the community.",
     )
-    audience: Optional[Union[List[Union[dynamic_creation('Audience'), str]], dynamic_creation('Audience'), str]] = Field(
+    audience: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An intended audience, i.e. a group for whom something was created.",
     )
-    encoding: Optional[Union[List[Union[dynamic_creation('MediaObject'), str]], dynamic_creation('MediaObject'), str]] = Field(
+    encoding: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.",
     )
-    publisherImprint: Optional[Union[List[Union[dynamic_creation('Organization'), str]], dynamic_creation('Organization'), str]] = Field(
+    publisherImprint: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The publishing division which published the comic.",
     )
-    accessibilityAPI: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessibilityAPI: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Indicates that the resource is compatible with the referenced accessibility API. Values"
      "should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).",
     )
-    sdPublisher: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    sdPublisher: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates the party responsible for generating and publishing the current structured"
      "data markup, typically in cases where the structured data is derived automatically"
@@ -568,16 +501,16 @@ class ProductCollection(BaseModel):
      "structured metadata. The [[sdPublisher]] property helps make such practices more"
      "explicit.",
     )
-    audio: Optional[Union[List[Union[dynamic_creation('MusicRecording'), dynamic_creation('Clip'), dynamic_creation('AudioObject'), str]], dynamic_creation('MusicRecording'), dynamic_creation('Clip'), dynamic_creation('AudioObject'), str]] = Field(
+    audio: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An embedded audio object.",
     )
-    accessibilityFeature: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessibilityFeature: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Content features of the resource, such as accessible media, alternatives and supported"
      "enhancements for accessibility. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).",
     )
-    spatialCoverage: Optional[Union[List[Union[dynamic_creation('Place'), str]], dynamic_creation('Place'), str]] = Field(
+    spatialCoverage: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of"
      "the content. It is a subproperty of contentLocation intended primarily for more technical"
@@ -585,12 +518,12 @@ class ProductCollection(BaseModel):
      "describes: a dataset of New York weather would have spatialCoverage which was the place:"
      "the state of New York.",
     )
-    accessMode: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessMode: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The human sensory perceptual system or cognitive faculty through which a person may"
      "process or perceive information. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).",
     )
-    editEIDR: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    editEIDR: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]]"
      "representing a specific edit / edition for a work of film or television. For example,"
@@ -600,7 +533,7 @@ class ProductCollection(BaseModel):
      "their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general"
      "description), or alongside [[editEIDR]] for a more edit-specific description.",
     )
-    usageInfo: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    usageInfo: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="The schema.org [[usageInfo]] property indicates further information about a [[CreativeWork]]."
      "This property is applicable both to works that are freely available and to those that"
@@ -613,11 +546,11 @@ class ProductCollection(BaseModel):
      "e.g. acquiring commercial usage rights for an image that is also available under non-commercial"
      "creative commons licenses.",
     )
-    position: Optional[Union[List[Union[int, dynamic_creation('Integer'), str, dynamic_creation('Text')]], int, dynamic_creation('Integer'), str, dynamic_creation('Text')]] = Field(
+    position: Union[List[Union[Any, int, str]], Any, int, str] = Field(
         default=None,
         description="The position of an item in a series or sequence of items.",
     )
-    encodingFormat: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    encodingFormat: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Media type typically expressed using a MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml)"
      "and [MDN reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)),"
@@ -627,97 +560,97 @@ class ProductCollection(BaseModel):
      "information. Unregistered or niche encoding and file formats can be indicated instead"
      "via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.",
     )
-    copyrightYear: Optional[Union[List[Union[StrictInt, StrictFloat, dynamic_creation('Number'), str]], StrictInt, StrictFloat, dynamic_creation('Number'), str]] = Field(
+    copyrightYear: Optional[Union[List[Union[Any, StrictInt, StrictFloat, str]], Any, StrictInt, StrictFloat, str]] = Field(
         default=None,
         description="The year during which the claimed copyright for the CreativeWork was first asserted.",
     )
-    mainEntity: Optional[Union[List[Union[dynamic_creation('Thing'), str]], dynamic_creation('Thing'), str]] = Field(
+    mainEntity: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates the primary entity described in some page or other CreativeWork.",
     )
-    creator: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    creator: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The creator/author of this CreativeWork. This is the same as the Author property for"
      "CreativeWork.",
     )
-    teaches: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    teaches: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The item being described is intended to help a person learn the competency or learning"
      "outcome defined by the referenced term.",
     )
-    temporal: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), str, dynamic_creation('Text')]], datetime, dynamic_creation('DateTime'), str, dynamic_creation('Text')]] = Field(
+    temporal: Union[List[Union[datetime, Any, str]], datetime, Any, str] = Field(
         default=None,
         description="The \"temporal\" property can be used in cases where more specific properties (e.g."
      "[[temporalCoverage]], [[dateCreated]], [[dateModified]], [[datePublished]])"
      "are not known to be appropriate.",
     )
-    size: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]] = Field(
+    size: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
      "or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]],"
      "[[height]], [[depth]] and [[weight]] properties may be more applicable.",
     )
-    translator: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    translator: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Organization or person who adapts a creative work to different languages, regional"
      "differences and technical requirements of a target market, or that translates during"
      "some event.",
     )
-    aggregateRating: Optional[Union[List[Union[dynamic_creation('AggregateRating'), str]], dynamic_creation('AggregateRating'), str]] = Field(
+    aggregateRating: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    accountablePerson: Optional[Union[List[Union[dynamic_creation('Person'), str]], dynamic_creation('Person'), str]] = Field(
+    accountablePerson: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Specifies the Person that is legally accountable for the CreativeWork.",
     )
-    accessibilityHazard: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    accessibilityHazard: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A characteristic of the described resource that is physiologically dangerous to some"
      "users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityHazard-vocabulary).",
     )
-    contentRating: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('Rating')]], str, dynamic_creation('Text'), dynamic_creation('Rating')]] = Field(
+    contentRating: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Official rating of a piece of content&#x2014;for example, 'MPAA PG-13'.",
     )
-    recordedAt: Optional[Union[List[Union[dynamic_creation('Event'), str]], dynamic_creation('Event'), str]] = Field(
+    recordedAt: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The Event where the CreativeWork was recorded. The CreativeWork may capture all or part"
      "of the event.",
     )
-    publication: Optional[Union[List[Union[dynamic_creation('PublicationEvent'), str]], dynamic_creation('PublicationEvent'), str]] = Field(
+    publication: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A publication event associated with the item.",
     )
-    sdLicense: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), Any, str]], AnyUrl, dynamic_creation('URL'), Any, str]] = Field(
+    sdLicense: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="A license document that applies to this structured data, typically indicated by URL.",
     )
-    headline: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    headline: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Headline of the article.",
     )
-    materialExtent: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('QuantitativeValue')]], str, dynamic_creation('Text'), dynamic_creation('QuantitativeValue')]] = Field(
+    materialExtent: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The quantity of the materials being described or an expression of the physical space"
      "they occupy.",
     )
-    inLanguage: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('Language')]], str, dynamic_creation('Text'), dynamic_creation('Language')]] = Field(
+    inLanguage: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The language of the content or performance or used in an action. Please use one of the language"
      "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
      "[[availableLanguage]].",
     )
-    material: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('Product')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('Product')]] = Field(
+    material: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A material that something is made from, e.g. leather, wool, cotton, paper.",
     )
-    datePublished: Optional[Union[List[Union[datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]], datetime, dynamic_creation('DateTime'), date, dynamic_creation('Date'), str]] = Field(
+    datePublished: Optional[Union[List[Union[datetime, date, Any, str]], datetime, date, Any, str]] = Field(
         default=None,
         description="Date of first broadcast/publication.",
     )
-    offers: Optional[Union[List[Union[dynamic_creation('Offer'), dynamic_creation('Demand'), str]], dynamic_creation('Offer'), dynamic_creation('Demand'), str]] = Field(
+    offers: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -731,77 +664,77 @@ class ProductCollection(BaseModel):
         description="Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some"
      "sense).",
     )
-    sourceOrganization: Optional[Union[List[Union[dynamic_creation('Organization'), str]], dynamic_creation('Organization'), str]] = Field(
+    sourceOrganization: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The Organization on whose behalf the creator was working.",
     )
-    sponsor: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Person'), str]], dynamic_creation('Organization'), dynamic_creation('Person'), str]] = Field(
+    sponsor: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
     )
-    character: Optional[Union[List[Union[dynamic_creation('Person'), str]], dynamic_creation('Person'), str]] = Field(
+    character: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Fictional person connected with a creative work.",
     )
-    collectionSize: Optional[Union[List[Union[int, dynamic_creation('Integer'), str]], int, dynamic_creation('Integer'), str]] = Field(
+    collectionSize: Optional[Union[List[Union[Any, int, str]], Any, int, str]] = Field(
         default=None,
         description="The number of items in the [[Collection]].",
     )
-    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
+    potentialAction: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
+    subjectOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    url: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternateName: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    sameAs: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    description: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    disambiguatingDescription: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
+    identifier: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    image: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    name: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    additionalType: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -809,17 +742,17 @@ class ProductCollection(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    hasMeasurement: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
+    hasMeasurement: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A product measurement, for example the inseam of pants, the wheel size of a bicycle, or"
      "the gauge of a screw. Usually an exact measurement, but can also be a range of measurements"
      "for adjustable products, for example belts and ski bindings.",
     )
-    countryOfAssembly: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    countryOfAssembly: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The place where the product was assembled.",
     )
-    width: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    width: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The width of the item.",
     )
@@ -832,11 +765,11 @@ class ProductCollection(BaseModel):
         default=None,
         description="A pointer to another product (or multiple products) for which this product is a consumable.",
     )
-    depth: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    depth: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The depth of the item.",
     )
-    additionalProperty: Optional[Union[List[Union[dynamic_creation('PropertyValue'), str]], dynamic_creation('PropertyValue'), str]] = Field(
+    additionalProperty: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A property-value pair representing an additional characteristic of the entity, e.g."
      "a product feature or another characteristic for which there is no matching property"
@@ -845,7 +778,7 @@ class ProductCollection(BaseModel):
      "https://schema.org/gtin13, ...) will typically expect such data to be provided using"
      "those properties, rather than using the generic property/value mechanism.",
     )
-    isVariantOf: Optional[Union[List[Union[dynamic_creation('ProductGroup'), dynamic_creation('ProductModel'), str]], dynamic_creation('ProductGroup'), dynamic_creation('ProductModel'), str]] = Field(
+    isVariantOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates the kind of product that this is a variant of. In the case of [[ProductModel]],"
      "this is a pointer (from a ProductModel) to a base product from which this product is a variant."
@@ -856,25 +789,25 @@ class ProductCollection(BaseModel):
      "as well as which values distinguish amongst those variants). When used with [[ProductGroup]],"
      "this property can apply to any [[Product]] included in the group.",
     )
-    slogan: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    slogan: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A slogan or motto associated with the item.",
     )
-    manufacturer: Optional[Union[List[Union[dynamic_creation('Organization'), str]], dynamic_creation('Organization'), str]] = Field(
+    manufacturer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The manufacturer of the product.",
     )
-    gtin14: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin14: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN"
      "Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
     )
-    keywords: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    keywords: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    positiveNotes: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]], str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]] = Field(
+    positiveNotes: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Provides positive considerations regarding something, for example product highlights"
      "or (alongside [[negativeNotes]]) pro/con lists for reviews. In the case of a [[Review]],"
@@ -883,45 +816,45 @@ class ProductCollection(BaseModel):
      "can be expressed either as unstructured text (repeated as necessary), or if ordered,"
      "as a list (in which case the most positive is at the beginning of the list).",
     )
-    reviews: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    reviews: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Review of the item.",
     )
-    height: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    height: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The height of the item.",
     )
-    model: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ProductModel')]], str, dynamic_creation('Text'), dynamic_creation('ProductModel')]] = Field(
+    model: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The model of the product. Use with the URL of a ProductModel or a textual representation"
      "of the model identifier. The URL of the ProductModel can be from an external source. It"
      "is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14"
      "and mpn properties.",
     )
-    itemCondition: Optional[Union[List[Union[dynamic_creation('OfferItemCondition'), str]], dynamic_creation('OfferItemCondition'), str]] = Field(
+    itemCondition: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A predefined value from OfferItemCondition specifying the condition of the product"
      "or service, or the products or services included in the offer. Also used for product return"
      "policies to specify the condition of products accepted for returns.",
     )
-    award: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    award: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An award won by or for this item.",
     )
-    nsn: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    nsn: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number)"
      "(nsn) of a [[Product]].",
     )
-    awards: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    awards: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Awards won by or for this item.",
     )
-    review: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    review: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A review of the item.",
     )
-    gtin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    gtin: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin))."
      "GTINs identify trade items, including products and services, using numeric identification"
@@ -941,11 +874,11 @@ class ProductCollection(BaseModel):
      "data, and not a definition of GTINs in general - see the GS1 documentation for authoritative"
      "details.",
     )
-    isRelatedTo: Optional[Union[List[Union[Any, dynamic_creation('Service'), str]], Any, dynamic_creation('Service'), str]] = Field(
+    isRelatedTo: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A pointer to another, somehow related product (or multiple products).",
     )
-    negativeNotes: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]], str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]] = Field(
+    negativeNotes: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Provides negative considerations regarding something, most typically in pro/con"
      "lists for reviews (alongside [[positiveNotes]]). For symmetry In the case of a [[Review]],"
@@ -957,12 +890,12 @@ class ProductCollection(BaseModel):
      "as necessary), or if ordered, as a list (in which case the most negative is at the beginning"
      "of the list).",
     )
-    funding: Optional[Union[List[Union[dynamic_creation('Grant'), str]], dynamic_creation('Grant'), str]] = Field(
+    funding: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
      "See also [[ownershipFundingInfo]].",
     )
-    mobileUrl: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    mobileUrl: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The [[mobileUrl]] property is provided for specific situations in which data consumers"
      "need to determine whether one of several provided URLs is a dedicated 'mobile site'."
@@ -977,46 +910,46 @@ class ProductCollection(BaseModel):
      "[[Product]] and [[Offer]]) have extra URLs hosted on an additional \"mobile site\""
      "alongside the main one. It should not be taken as an endorsement of this publication style.",
     )
-    hasEnergyConsumptionDetails: Optional[Union[List[Union[dynamic_creation('EnergyConsumptionDetails'), str]], dynamic_creation('EnergyConsumptionDetails'), str]] = Field(
+    hasEnergyConsumptionDetails: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Defines the energy efficiency Category (also known as \"class\" or \"rating\") for"
      "a product according to an international energy efficiency standard.",
     )
-    weight: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
+    weight: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The weight of the product or person.",
     )
-    hasMerchantReturnPolicy: Optional[Union[List[Union[dynamic_creation('MerchantReturnPolicy'), str]], dynamic_creation('MerchantReturnPolicy'), str]] = Field(
+    hasMerchantReturnPolicy: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Specifies a MerchantReturnPolicy that may be applicable.",
     )
-    pattern: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    pattern: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'."
      "Values are typically expressed as text, although links to controlled value schemes"
      "are also supported.",
     )
-    isFamilyFriendly: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    isFamilyFriendly: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="Indicates whether this content is family friendly.",
     )
-    gtin12: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin12: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12"
      "is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference,"
      "and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    isSimilarTo: Optional[Union[List[Union[Any, dynamic_creation('Service'), str]], Any, dynamic_creation('Service'), str]] = Field(
+    isSimilarTo: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A pointer to another, functionally similar product (or multiple products).",
     )
-    productID: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    productID: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The product identifier, such as ISBN. For example: ``` meta itemprop=\"productID\""
      "content=\"isbn:123-456-789\" ```.",
     )
-    countryOfOrigin: Optional[Union[List[Union[dynamic_creation('Country'), str]], dynamic_creation('Country'), str]] = Field(
+    countryOfOrigin: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The country of origin of something, including products as well as creative works such"
      "as movie and TV content. In the case of TV and movie, this would be the country of the principle"
@@ -1026,28 +959,28 @@ class ProductCollection(BaseModel):
      "case of products, the country of origin of the product. The exact interpretation of this"
      "may vary by context and product type, and cannot be fully enumerated here.",
     )
-    hasAdultConsideration: Optional[Union[List[Union[dynamic_creation('AdultOrientedEnumeration'), str]], dynamic_creation('AdultOrientedEnumeration'), str]] = Field(
+    hasAdultConsideration: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Used to tag an item to be intended or suitable for consumption or use by adults only.",
     )
-    purchaseDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    purchaseDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The date the item, e.g. vehicle, was purchased by the current owner.",
     )
-    audience: Optional[Union[List[Union[dynamic_creation('Audience'), str]], dynamic_creation('Audience'), str]] = Field(
+    audience: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An intended audience, i.e. a group for whom something was created.",
     )
-    logo: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    logo: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An associated logo.",
     )
-    countryOfLastProcessing: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    countryOfLastProcessing: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The place where the item (typically [[Product]]) was last processed and tested before"
      "importation.",
     )
-    asin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    asin: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique"
      "identifier assigned by Amazon.com and its partners for product identification within"
@@ -1057,59 +990,59 @@ class ProductCollection(BaseModel):
      "details. ASINs are most commonly encoded as text strings, but the [asin] property supports"
      "URL/URI as potential values too.",
     )
-    gtin8: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin8: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-8 code of the product, or the product to which the offer refers. This code is also"
      "known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    releaseDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    releaseDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The release date of a product or product model. This can be used to distinguish the exact"
      "variant of a product.",
     )
-    brand: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Brand'), str]], dynamic_creation('Organization'), dynamic_creation('Brand'), str]] = Field(
+    brand: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The brand(s) associated with a product or service, or the brand(s) maintained by an organization"
      "or business person.",
     )
-    productionDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    productionDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The date of production of the item, e.g. vehicle.",
     )
-    inProductGroupWithID: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    inProductGroupWithID: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].",
     )
-    size: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]] = Field(
+    size: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
      "or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]],"
      "[[height]], [[depth]] and [[weight]] properties may be more applicable.",
     )
-    mpn: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    mpn: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
     )
-    category: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CategoryCode'), dynamic_creation('PhysicalActivityCategory'), dynamic_creation('Thing')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CategoryCode'), dynamic_creation('PhysicalActivityCategory'), dynamic_creation('Thing')]] = Field(
+    category: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
     )
-    aggregateRating: Optional[Union[List[Union[dynamic_creation('AggregateRating'), str]], dynamic_creation('AggregateRating'), str]] = Field(
+    aggregateRating: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    color: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    color: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The color of the product.",
     )
-    material: Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), Any]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), Any] = Field(
+    material: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A material that something is made from, e.g. leather, wool, cotton, paper.",
     )
-    offers: Optional[Union[List[Union[dynamic_creation('Offer'), dynamic_creation('Demand'), str]], dynamic_creation('Offer'), dynamic_creation('Demand'), str]] = Field(
+    offers: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -1118,81 +1051,21 @@ class ProductCollection(BaseModel):
      "of common types, it can be used in others. In that case, using a second type, such as Product"
      "or a subtype of Product, can clarify the nature of the offer.",
     )
-    gtin13: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin13: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent"
      "to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into"
      "a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    sku: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    sku: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service,"
      "or the product to which the offer refers.",
     )
-    includesObject: Optional[Union[List[Union[dynamic_creation('TypeAndQuantityNode'), str]], dynamic_creation('TypeAndQuantityNode'), str]] = Field(
+    includesObject: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="This links to a node or nodes indicating the exact quantity of the products included in"
      "an [[Offer]] or [[ProductCollection]].",
     )
     
-
-if TYPE_CHECKING:
-    from pydantic_schemaorg.MediaObject import MediaObject
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.PublicationEvent import PublicationEvent
-    from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-    from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Grant import Grant
-    from pydantic_schemaorg.WebPage import WebPage
-    from pydantic import BaseModel
-    from pydantic_schemaorg.EnergyConsumptionDetails import EnergyConsumptionDetails
-    from pydantic_schemaorg.Clip import Clip
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.WebContent import WebContent
-    from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.MusicRecording import MusicRecording
-    from pydantic_schemaorg.AudioObject import AudioObject
-    from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
-    from pydantic_schemaorg.AdultOrientedEnumeration import AdultOrientedEnumeration
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.CategoryCode import CategoryCode
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.Demand import Demand
-    from pydantic_schemaorg.VideoObject import VideoObject
-    from pydantic_schemaorg.CorrectionComment import CorrectionComment
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.Brand import Brand
-    from pydantic_schemaorg.Claim import Claim
-    from pydantic_schemaorg.Review import Review
-    from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.ProductModel import ProductModel
-    from pydantic_schemaorg.Distance import Distance
-    from pydantic_schemaorg.Rating import Rating
-    from pydantic_schemaorg.ImageObject import ImageObject
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.AlignmentObject import AlignmentObject
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.Action import Action
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.AggregateRating import AggregateRating
-    from pydantic_schemaorg.Comment import Comment
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.ProductGroup import ProductGroup
-    from pydantic_schemaorg.ListItem import ListItem
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.TypeAndQuantityNode import TypeAndQuantityNode
-    from pydantic_schemaorg.InteractionCounter import InteractionCounter
-    from pydantic_schemaorg.SizeSpecification import SizeSpecification
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory

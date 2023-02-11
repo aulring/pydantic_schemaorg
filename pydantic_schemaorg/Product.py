@@ -1,49 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
-from typing import TYPE_CHECKING
-
-from datetime import date
-from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool
-
-
-from pydantic_schemaorg.Service import Service
-from pydantic_schemaorg.ProductGroup import ProductGroup
-from pydantic_schemaorg.Offer import Offer
-from pydantic_schemaorg.DefinedTerm import DefinedTerm
-from pydantic_schemaorg.Boolean import Boolean
-from pydantic_schemaorg.Audience import Audience
-from pydantic_schemaorg.Action import Action
-from pydantic_schemaorg.Text import Text
-from pydantic_schemaorg.AdultOrientedEnumeration import AdultOrientedEnumeration
-from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-from pydantic_schemaorg.Thing import Thing
-from pydantic_schemaorg.PropertyValue import PropertyValue
-from pydantic_schemaorg.SchemaOrgBase import SchemaOrgBase
-from pydantic_schemaorg.SizeSpecification import SizeSpecification
-from pydantic_schemaorg.ItemList import ItemList
-from pydantic_schemaorg.ImageObject import ImageObject
-from pydantic_schemaorg.Brand import Brand
-from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-from pydantic import Field
-from pydantic_schemaorg.CategoryCode import CategoryCode
-from pydantic_schemaorg.Grant import Grant
-from pydantic_schemaorg.Country import Country
-from pydantic_schemaorg.Event import Event
-from pydantic_schemaorg.AggregateRating import AggregateRating
-from pydantic_schemaorg.ProductModel import ProductModel
-from pydantic_schemaorg.URL import URL
-from pydantic_schemaorg.Organization import Organization
-from pydantic_schemaorg.WebContent import WebContent
-from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
-from pydantic_schemaorg.Review import Review
-from pydantic_schemaorg.ListItem import ListItem
-from pydantic_schemaorg.Demand import Demand
-from pydantic_schemaorg.EnergyConsumptionDetails import EnergyConsumptionDetails
-from pydantic_schemaorg.Date import Date
-from pydantic_schemaorg.CreativeWork import CreativeWork
-from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-from pydantic_schemaorg.Distance import Distance
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
 
 
 class Product(BaseModel):
@@ -54,60 +13,60 @@ class Product(BaseModel):
     Model depth: 2
     """
     type_: str = Field(default="Product", alias='@type', const=True)
-    potentialAction: Optional[Union[List[Union[dynamic_creation('Action'), str]], dynamic_creation('Action'), str]] = Field(
+    potentialAction: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates a potential Action, which describes an idealized action in which this thing"
      "would play an 'object' role.",
     )
-    mainEntityOfPage: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('CreativeWork'), str]] = Field(
+    mainEntityOfPage: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
      "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
      "for details.",
     )
-    subjectOf: Optional[Union[List[Union[dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]], dynamic_creation('CreativeWork'), dynamic_creation('Event'), str]] = Field(
+    subjectOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A CreativeWork or Event about this Thing.",
     )
-    url: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    url: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of the item.",
     )
-    alternateName: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    alternateName: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An alias for the item.",
     )
-    sameAs: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    sameAs: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
      "URL of the item's Wikipedia page, Wikidata entry, or official website.",
     )
-    description: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    description: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A description of the item.",
     )
-    disambiguatingDescription: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    disambiguatingDescription: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A sub property of description. A short description of the item used to disambiguate from"
      "other, similar items. Information from other properties (in particular, name) may"
      "be necessary for the description to be useful for disambiguation.",
     )
-    identifier: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('PropertyValue')]] = Field(
+    identifier: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
      "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
      "representing many of these, either as textual strings or as URL (URI) links. See [background"
      "notes](/docs/datamodel.html#identifierBg) for more details.",
     )
-    image: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    image: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
     )
-    name: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    name: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The name of the item.",
     )
-    additionalType: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str]], AnyUrl, dynamic_creation('URL'), str]] = Field(
+    additionalType: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An additional type for the item, typically used for adding more specific types from external"
      "vocabularies in microdata syntax. This is a relationship between something and a class"
@@ -115,17 +74,17 @@ class Product(BaseModel):
      "attribute - for multiple types. Schema.org tools may have only weaker understanding"
      "of extra types, in particular those defined externally.",
     )
-    hasMeasurement: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
+    hasMeasurement: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A product measurement, for example the inseam of pants, the wheel size of a bicycle, or"
      "the gauge of a screw. Usually an exact measurement, but can also be a range of measurements"
      "for adjustable products, for example belts and ski bindings.",
     )
-    countryOfAssembly: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    countryOfAssembly: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The place where the product was assembled.",
     )
-    width: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    width: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The width of the item.",
     )
@@ -138,11 +97,11 @@ class Product(BaseModel):
         default=None,
         description="A pointer to another product (or multiple products) for which this product is a consumable.",
     )
-    depth: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    depth: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The depth of the item.",
     )
-    additionalProperty: Optional[Union[List[Union[dynamic_creation('PropertyValue'), str]], dynamic_creation('PropertyValue'), str]] = Field(
+    additionalProperty: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A property-value pair representing an additional characteristic of the entity, e.g."
      "a product feature or another characteristic for which there is no matching property"
@@ -151,7 +110,7 @@ class Product(BaseModel):
      "https://schema.org/gtin13, ...) will typically expect such data to be provided using"
      "those properties, rather than using the generic property/value mechanism.",
     )
-    isVariantOf: Optional[Union[List[Union[dynamic_creation('ProductGroup'), dynamic_creation('ProductModel'), str]], dynamic_creation('ProductGroup'), dynamic_creation('ProductModel'), str]] = Field(
+    isVariantOf: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Indicates the kind of product that this is a variant of. In the case of [[ProductModel]],"
      "this is a pointer (from a ProductModel) to a base product from which this product is a variant."
@@ -162,25 +121,25 @@ class Product(BaseModel):
      "as well as which values distinguish amongst those variants). When used with [[ProductGroup]],"
      "this property can apply to any [[Product]] included in the group.",
     )
-    slogan: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    slogan: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A slogan or motto associated with the item.",
     )
-    manufacturer: Optional[Union[List[Union[dynamic_creation('Organization'), str]], dynamic_creation('Organization'), str]] = Field(
+    manufacturer: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The manufacturer of the product.",
     )
-    gtin14: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin14: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN"
      "Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
     )
-    keywords: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    keywords: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    positiveNotes: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]], str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]] = Field(
+    positiveNotes: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Provides positive considerations regarding something, for example product highlights"
      "or (alongside [[negativeNotes]]) pro/con lists for reviews. In the case of a [[Review]],"
@@ -189,45 +148,45 @@ class Product(BaseModel):
      "can be expressed either as unstructured text (repeated as necessary), or if ordered,"
      "as a list (in which case the most positive is at the beginning of the list).",
     )
-    reviews: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    reviews: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Review of the item.",
     )
-    height: Optional[Union[List[Union[dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]], dynamic_creation('Distance'), dynamic_creation('QuantitativeValue'), str]] = Field(
+    height: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The height of the item.",
     )
-    model: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ProductModel')]], str, dynamic_creation('Text'), dynamic_creation('ProductModel')]] = Field(
+    model: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The model of the product. Use with the URL of a ProductModel or a textual representation"
      "of the model identifier. The URL of the ProductModel can be from an external source. It"
      "is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14"
      "and mpn properties.",
     )
-    itemCondition: Optional[Union[List[Union[dynamic_creation('OfferItemCondition'), str]], dynamic_creation('OfferItemCondition'), str]] = Field(
+    itemCondition: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A predefined value from OfferItemCondition specifying the condition of the product"
      "or service, or the products or services included in the offer. Also used for product return"
      "policies to specify the condition of products accepted for returns.",
     )
-    award: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    award: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="An award won by or for this item.",
     )
-    nsn: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    nsn: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number)"
      "(nsn) of a [[Product]].",
     )
-    awards: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    awards: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Awards won by or for this item.",
     )
-    review: Optional[Union[List[Union[dynamic_creation('Review'), str]], dynamic_creation('Review'), str]] = Field(
+    review: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A review of the item.",
     )
-    gtin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    gtin: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin))."
      "GTINs identify trade items, including products and services, using numeric identification"
@@ -247,11 +206,11 @@ class Product(BaseModel):
      "data, and not a definition of GTINs in general - see the GS1 documentation for authoritative"
      "details.",
     )
-    isRelatedTo: Optional[Union[List[Union[Any, dynamic_creation('Service'), str]], Any, dynamic_creation('Service'), str]] = Field(
+    isRelatedTo: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A pointer to another, somehow related product (or multiple products).",
     )
-    negativeNotes: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]], str, dynamic_creation('Text'), dynamic_creation('ItemList'), dynamic_creation('WebContent'), dynamic_creation('ListItem')]] = Field(
+    negativeNotes: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Provides negative considerations regarding something, most typically in pro/con"
      "lists for reviews (alongside [[positiveNotes]]). For symmetry In the case of a [[Review]],"
@@ -263,12 +222,12 @@ class Product(BaseModel):
      "as necessary), or if ordered, as a list (in which case the most negative is at the beginning"
      "of the list).",
     )
-    funding: Optional[Union[List[Union[dynamic_creation('Grant'), str]], dynamic_creation('Grant'), str]] = Field(
+    funding: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
      "See also [[ownershipFundingInfo]].",
     )
-    mobileUrl: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    mobileUrl: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The [[mobileUrl]] property is provided for specific situations in which data consumers"
      "need to determine whether one of several provided URLs is a dedicated 'mobile site'."
@@ -283,46 +242,46 @@ class Product(BaseModel):
      "[[Product]] and [[Offer]]) have extra URLs hosted on an additional \"mobile site\""
      "alongside the main one. It should not be taken as an endorsement of this publication style.",
     )
-    hasEnergyConsumptionDetails: Optional[Union[List[Union[dynamic_creation('EnergyConsumptionDetails'), str]], dynamic_creation('EnergyConsumptionDetails'), str]] = Field(
+    hasEnergyConsumptionDetails: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Defines the energy efficiency Category (also known as \"class\" or \"rating\") for"
      "a product according to an international energy efficiency standard.",
     )
-    weight: Optional[Union[List[Union[dynamic_creation('QuantitativeValue'), str]], dynamic_creation('QuantitativeValue'), str]] = Field(
+    weight: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The weight of the product or person.",
     )
-    hasMerchantReturnPolicy: Optional[Union[List[Union[dynamic_creation('MerchantReturnPolicy'), str]], dynamic_creation('MerchantReturnPolicy'), str]] = Field(
+    hasMerchantReturnPolicy: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Specifies a MerchantReturnPolicy that may be applicable.",
     )
-    pattern: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm')]] = Field(
+    pattern: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'."
      "Values are typically expressed as text, although links to controlled value schemes"
      "are also supported.",
     )
-    isFamilyFriendly: Optional[Union[List[Union[StrictBool, dynamic_creation('Boolean'), str]], StrictBool, dynamic_creation('Boolean'), str]] = Field(
+    isFamilyFriendly: Optional[Union[List[Union[StrictBool, Any, str]], StrictBool, Any, str]] = Field(
         default=None,
         description="Indicates whether this content is family friendly.",
     )
-    gtin12: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin12: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12"
      "is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference,"
      "and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    isSimilarTo: Optional[Union[List[Union[Any, dynamic_creation('Service'), str]], Any, dynamic_creation('Service'), str]] = Field(
+    isSimilarTo: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="A pointer to another, functionally similar product (or multiple products).",
     )
-    productID: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    productID: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The product identifier, such as ISBN. For example: ``` meta itemprop=\"productID\""
      "content=\"isbn:123-456-789\" ```.",
     )
-    countryOfOrigin: Optional[Union[List[Union[dynamic_creation('Country'), str]], dynamic_creation('Country'), str]] = Field(
+    countryOfOrigin: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The country of origin of something, including products as well as creative works such"
      "as movie and TV content. In the case of TV and movie, this would be the country of the principle"
@@ -332,28 +291,28 @@ class Product(BaseModel):
      "case of products, the country of origin of the product. The exact interpretation of this"
      "may vary by context and product type, and cannot be fully enumerated here.",
     )
-    hasAdultConsideration: Optional[Union[List[Union[dynamic_creation('AdultOrientedEnumeration'), str]], dynamic_creation('AdultOrientedEnumeration'), str]] = Field(
+    hasAdultConsideration: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="Used to tag an item to be intended or suitable for consumption or use by adults only.",
     )
-    purchaseDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    purchaseDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The date the item, e.g. vehicle, was purchased by the current owner.",
     )
-    audience: Optional[Union[List[Union[dynamic_creation('Audience'), str]], dynamic_creation('Audience'), str]] = Field(
+    audience: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An intended audience, i.e. a group for whom something was created.",
     )
-    logo: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]], AnyUrl, dynamic_creation('URL'), dynamic_creation('ImageObject'), str]] = Field(
+    logo: Optional[Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl]] = Field(
         default=None,
         description="An associated logo.",
     )
-    countryOfLastProcessing: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    countryOfLastProcessing: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The place where the item (typically [[Product]]) was last processed and tested before"
      "importation.",
     )
-    asin: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text')]] = Field(
+    asin: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique"
      "identifier assigned by Amazon.com and its partners for product identification within"
@@ -363,59 +322,59 @@ class Product(BaseModel):
      "details. ASINs are most commonly encoded as text strings, but the [asin] property supports"
      "URL/URI as potential values too.",
     )
-    gtin8: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin8: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-8 code of the product, or the product to which the offer refers. This code is also"
      "known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    releaseDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    releaseDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The release date of a product or product model. This can be used to distinguish the exact"
      "variant of a product.",
     )
-    brand: Optional[Union[List[Union[dynamic_creation('Organization'), dynamic_creation('Brand'), str]], dynamic_creation('Organization'), dynamic_creation('Brand'), str]] = Field(
+    brand: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The brand(s) associated with a product or service, or the brand(s) maintained by an organization"
      "or business person.",
     )
-    productionDate: Optional[Union[List[Union[date, dynamic_creation('Date'), str]], date, dynamic_creation('Date'), str]] = Field(
+    productionDate: Optional[Union[List[Union[date, Any, str]], date, Any, str]] = Field(
         default=None,
         description="The date of production of the item, e.g. vehicle.",
     )
-    inProductGroupWithID: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    inProductGroupWithID: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].",
     )
-    size: Optional[Union[List[Union[str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]], str, dynamic_creation('Text'), dynamic_creation('DefinedTerm'), dynamic_creation('SizeSpecification'), dynamic_creation('QuantitativeValue')]] = Field(
+    size: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
      "or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]],"
      "[[height]], [[depth]] and [[weight]] properties may be more applicable.",
     )
-    mpn: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    mpn: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
     )
-    category: Optional[Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CategoryCode'), dynamic_creation('PhysicalActivityCategory'), dynamic_creation('Thing')]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), dynamic_creation('CategoryCode'), dynamic_creation('PhysicalActivityCategory'), dynamic_creation('Thing')]] = Field(
+    category: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
     )
-    aggregateRating: Optional[Union[List[Union[dynamic_creation('AggregateRating'), str]], dynamic_creation('AggregateRating'), str]] = Field(
+    aggregateRating: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    color: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    color: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The color of the product.",
     )
-    material: Union[List[Union[AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), Any]], AnyUrl, dynamic_creation('URL'), str, dynamic_creation('Text'), Any] = Field(
+    material: Union[List[Union[Any, str, AnyUrl]], Any, str, AnyUrl] = Field(
         default=None,
         description="A material that something is made from, e.g. leather, wool, cotton, paper.",
     )
-    offers: Optional[Union[List[Union[dynamic_creation('Offer'), dynamic_creation('Demand'), str]], dynamic_creation('Offer'), dynamic_creation('Demand'), str]] = Field(
+    offers: Optional[Union[List[Union[Any, str]], Any, str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -424,54 +383,16 @@ class Product(BaseModel):
      "of common types, it can be used in others. In that case, using a second type, such as Product"
      "or a subtype of Product, can clarify the nature of the offer.",
     )
-    gtin13: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    gtin13: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent"
      "to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into"
      "a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)"
      "for more details.",
     )
-    sku: Optional[Union[List[Union[str, dynamic_creation('Text')]], str, dynamic_creation('Text')]] = Field(
+    sku: Union[List[Union[Any, str]], Any, str] = Field(
         default=None,
         description="The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service,"
      "or the product to which the offer refers.",
     )
     
-
-if TYPE_CHECKING:
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
-    from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Grant import Grant
-    from pydantic import BaseModel
-    from pydantic_schemaorg.EnergyConsumptionDetails import EnergyConsumptionDetails
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.PropertyValue import PropertyValue
-    from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
-    from pydantic_schemaorg.AdultOrientedEnumeration import AdultOrientedEnumeration
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.CategoryCode import CategoryCode
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Demand import Demand
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.Brand import Brand
-    from pydantic_schemaorg.ProductModel import ProductModel
-    from pydantic_schemaorg.Review import Review
-    from pydantic_schemaorg.Distance import Distance
-    from pydantic_schemaorg.ImageObject import ImageObject
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Action import Action
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.AggregateRating import AggregateRating
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.ProductGroup import ProductGroup
-    from pydantic_schemaorg.ListItem import ListItem
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.SizeSpecification import SizeSpecification
-    from pydantic_schemaorg.WebContent import WebContent

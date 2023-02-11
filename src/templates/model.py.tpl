@@ -1,16 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
-{%- if model.pydantic_imports %}
-from typing import TYPE_CHECKING
-{%- endif %}
-{% if model.field_imports %}
-{%- for import_ in model.field_imports %}
-from {{import_.classPath}} import {{import_.classes_ | sort | join(', ')}}
-{%- endfor %}
-{% endif %}
-{% for import_ in model.parent_imports%}
-from {{import_.classPath}} import {{import_.classes_ | sort|join(', ')}}
-{%- endfor %}
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
 
 
 class {{ model.valid_name }}(BaseModel):
@@ -27,9 +19,3 @@ class {{ model.valid_name }}(BaseModel):
         description="{{ field.description | replace('\\n','\n') | format_description }}",
     )
     {% endfor %}
-{% if model.pydantic_imports %}
-if TYPE_CHECKING:
-{%- for import_ in model.pydantic_imports %}
-    from {{import_.classPath}} import {{import_.classes_ | join(', ')}}
-{%- endfor %}
-{% endif %}
