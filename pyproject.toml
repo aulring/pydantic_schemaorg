@@ -1,19 +1,18 @@
 [tool.poetry]
-name = "pydantic_schemaorg"
+name = "schemaorg_types"
 version = "0.0.3"
-description = 'Pydantic classes for Schema.org'
+description = "Pydantic classes for Schema.org. Based on Reinoud Baker and Ewout Mante's package: https://github.com/lexiq-legal/pydantic_schemaorg"
 authors = [
-    "Reinoud Baker <reinoud@lexiq.nl>",
-    "Ewout Mante <e.mante@lexiq.nl>"
+    "Adam Ulring <adam.ulring1@gmail.com>"
 ]
 license = "MIT"
 readme = "README.md"
 
-homepage = "https://github.com/lexiq-legal/pydantic_schemaorg"
-repository = "https://github.com/lexiq-legal/pydantic_schemaorg"
-documentation = "https://github.com/lexiq-legal/pydantic_schemaorg"
+#homepage = "https://github.com/lexiq-legal/pydantic_schemaorg"
+#repository = "https://github.com/lexiq-legal/pydantic_schemaorg"
+#documentation = "https://github.com/lexiq-legal/pydantic_schemaorg"
 
-keywords = ["schema.org", "pydantic"]
+keywords = ["schema.org", "pydantic", "schemaorg"]
 
 [tool.poetry.dependencies]
 pydantic = "^1.8.2"

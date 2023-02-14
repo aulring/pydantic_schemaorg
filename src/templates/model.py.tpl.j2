@@ -1,0 +1,34 @@
+"""
+{{ model.clean_description() }}
+
+https://schema.org/{{ model.name }}
+"""
+
+from __future__ import annotations
+from pydantic import *
+from typing import *
+from datetime import *
+from time import *
+
+
+class {{ model.valid_name }}(BaseModel):
+    """{{ model.clean_description() }}
+
+    References:
+        https://schema.org/{{ model.name }}
+    Note:
+        Model Depth {{model.depth}}
+    Attributes:
+        {%- for field in model.fields %}
+        {{field.valid_name}}: ({{field.type}}): {{ field.clean_description() }}
+        {%- endfor %}
+
+    """
+    type_: str = Field(default="{{ model.name }}", alias='@type', const=True)
+    {% for field in model.fields -%}
+    {{ field.valid_name }}: {{ field.type }} = Field(
+        default=None,
+        {%- if field.valid_name != field.name -%} alias="{{ field.name }}",{% endif %}
+        description="{{ field.clean_description() | replace('\\n','\n') | format_description }}",
+    )
+    {% endfor %}

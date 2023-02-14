@@ -8,70 +8,18 @@ class PydanticBase(BaseModel):
     description: str
     valid_name: Optional[str] = None
 
-    @validator("valid_name", always=True)
-    def ab(cls, v, values) -> str:
-        if not values["name"]:
-            raise ValueError()
-        elif values["name"] in {
-            "class",
-            "def",
-            "from",
-            "import",
-            "return",
-            "yield",
-            "True",
-            "False",
-        }:
-            return f"{values['name']}_"
-        if values["name"][0].isdigit():
-            return f"_{values['name']}"
-        return values["name"]
+    def clean_description(self):
+        return self.description.replace("\\n", "").replace("\n", "")
 
 
-class PydanticField(PydanticBase):
+class AttributeType(PydanticBase):
     type: str
 
 
-class Import(BaseModel):
-    type: str
-    classPath: str
-    classes_: set
-
-    def __hash__(self):
-        return hash(self.type + self.classPath + str(self.classes_))
-
-
-class PydanticClass(PydanticBase):
-    fields: List[PydanticField]
-    parents: List["PydanticClass"]
+class ModelAttributes(PydanticBase):
+    fields: List[AttributeType]
+    parents: List["ModelAttributes"]
     depth: int = 1
-    parent_imports: List[Import]
-    field_imports: List[Import]
-    pydantic_imports: List[Import] = []
-    forward_refs: List[Import] = []
     filename: str = ""
 
-    @validator("filename", always=True)
-    def filename_val(cls, v, values) -> str:
-        if not values["valid_name"]:
-            raise ValueError()
-        filename = values["valid_name"]
-        if filename in {
-            "class",
-            "def",
-            "from",
-            "import",
-            "return",
-            "yield",
-        }:
-            return f"{filename}_"
-        return values["valid_name"]
-    
-    def to_lookup(self):
-        fields_str = ""
-        for field in self.fields:
-            fields_str += f""""{field.valid_name}": ("{field.type}", None), """.replace(self.valid_name, "Any")
-        return f"LOOKUP['{self.valid_name}'] = "  + "{ " + fields_str + "}"
 
-
-PydanticClass.update_forward_refs()
